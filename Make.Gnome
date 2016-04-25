@@ -1,0 +1,5 @@
+FF = ifort
+FFLAGS =  -fpp:1 -O3 -shared-intel -mcmodel=large -i8 -r8
+LDFLAGS = -fpp:1 -O3 -shared-intel -mcmodel=large -i8 -r8
+EXENAME = incompact3d
+

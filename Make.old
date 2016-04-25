@@ -1,0 +1,56 @@
+FC = ifort
+#OPTFC = -03 -ftrace -C hopt
+OPTFC =  -shared-intel -mcmodel=large -i8 -r8#-O3 -shared-intel -mcmodel=large -i8 -r8 #-g -check all -fpe0  -traceback
+#OPTFC =  -O3 
+incompact3d : module_param.o incompact3d.o stats.o schemas.o derive.o \
+			 waves.o tools.o poisson.o\
+		         filtre.o parametre.o\
+			 body.o navier.o slfft2d_shift.o slfft3d_shift.o\
+                         fft.o slfft2d.o convdiff.o forces.o scalar.o geom_complex.o
+			 
+	$(FC)   $(OPTFC) -o incompact3d \
+		incompact3d.o stats.o schemas.o derive.o \
+		waves.o tools.o poisson.o\
+		filtre.o parametre.o\
+		body.o navier.o slfft2d_shift.o slfft3d_shift.o\
+	        fft.o slfft2d.o convdiff.o module_param.o forces.o scalar.o geom_complex.o
+module_param.o : module_param.f90
+	$(FC)  $(OPTFC) -c module_param.f90
+incompact3d.o : incompact3d.f90
+	$(FC)  $(OPTFC) -c incompact3d.f90
+stats.o : stats.f90
+	$(FC)  $(OPTFC) -c stats.f90
+waves.o : waves.f90
+	$(FC)  $(OPTFC) -c waves.f90
+schemas.o : schemas.f90
+	$(FC)  $(OPTFC) -c schemas.f90
+derive.o : derive.f90
+	$(FC)  $(OPTFC) -c derive.f90
+tools.o : tools.f90
+	$(FC)  $(OPTFC)  -c tools.f90
+body.o : body.f90
+	$(FC)  $(OPTFC) -c body.f90
+navier.o : navier.f90
+	$(FC)  $(OPTFC)  -c navier.f90
+filtre.o : filtre.f90
+	$(FC)  $(OPTFC) -c filtre.f90
+parametre.o : parametre.f90
+	$(FC)  $(OPTFC) -c parametre.f90
+fft.o : fft.f90
+	$(FC) $(OPTFC) -c fft.f90
+slfft2d.o : slfft2d.f90
+	$(FC) $(OPTFC) -c slfft2d.f90
+poisson.o : poisson.f90
+	$(FC) $(OPTFC) -c poisson.f90
+convdiff.o : convdiff.f90
+	$(FC) $(OPTFC) -c convdiff.f90
+slfft2d_shift.o : slfft2d_shift.f90
+	$(FC) $(OPTFC) -c slfft2d_shift.f90
+slfft3d_shift.o : slfft3d_shift.f90
+	$(FC) $(OPTFC) -c slfft3d_shift.f90
+forces.o : forces.f90
+	$(FC) $(OPTFC) -c forces.f90
+scalar.o : scalar.f90
+	$(FC) $(OPTFC) -c scalar.f90
+geom_complex.o : geom_complex.f90
+	$(FC) $(OPTFC) -c geom_complex.f90

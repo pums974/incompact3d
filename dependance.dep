@@ -1,0 +1,24 @@
+body.o : body.f90 module_param.o  
+convdiff.o : convdiff.f90 module_param.o  
+convection.o : convection.f90 module_param.o  
+derivevitesse.o : derivevitesse.f90 module_param.o  
+derivetemperature.o : derivetemperature.f90 module_param.o  
+fft.o : fft.f90 
+filtre.o : filtre.f90 module_param.o 
+forces.o : forces.f90 module_param.o 
+geom_complex.o : geom_complex.f90 module_param.o 
+grille.o : grille.f90 
+incompact3d.o : incompact3d.f90 module_param.o 
+lorenz.o : lorenz.f90 
+module_param.o : module_param.f90 
+navier.o : navier.f90 module_param.o module_param.o 
+parametre.o : parametre.f90 module_param.o 
+poisson.o : poisson.f90 module_param.o 
+scalar.o : scalar.f90 module_param.o 
+schemas.o : schemas.f90 module_param.o 
+slfft2d.o : slfft2d.f90 module_param.o 
+slfft2d_shift.o : slfft2d_shift.f90 module_param.o 
+slfft3d_shift.o : slfft3d_shift.f90 module_param.o 
+stats.o : stats.f90 module_param.o 
+tools.o : tools.f90 module_param.o  
+waves.o : waves.f90 module_param.o  

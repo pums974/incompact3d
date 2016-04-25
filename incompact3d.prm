@@ -1,0 +1,76 @@
+#
+# INCOMPACT 3D Flow parameters 
+#
+6.   # Lx 
+3.   # Ly 
+1.   # Lz 
+40  # Reynolds number
+1.   # Schmidt number
+1.   # u1 (max velocity) 
+1.   # u2 (min velocity) 
+0.   # Turbulence intensity (1=100%)
+0.001  # Time step
+#
+# INCOMPACT3D Flow configuration
+#
+1      # nclx
+1      # ncly 
+0      # nclz
+7      # Type of flow (iecoule) 
+0      # Inflow condition (1: classic, 2: turbinit)
+1      # First iteration (idebut)  
+6000   # Last iteration (ifin)
+1      # Temporal scheme (1:AB2, 2: RK3, 3:RK4)
+0      # y mesh refinement (0:nonen, 1:center, 2:both sides, 3:bottom)
+10     # Refinement parameter (beta) 
+0      # impi (0: scalar, 1: parallel)
+1      # ifft (1: jmfft, 2: FFTW)
+1      # iskew (0:urotu, 1:skew)
+0      # ifiltre (0:pas de filtre, 1:filtre)
+0      # iscalaire (0: no scalar, 1:scalar)
+#
+# INCOMPACT 3D File parameters 
+#
+data           # Relative data path
+0              # Read initial flow field ?
+restart        # Name of initial flow field
+1              # Index of first snapshot file  
+100            # Iteration between snapshot
+sill40          # Prefix of snapshot files
+serie_3D.dat   # Name of temporel inflow condition
+condent.dat    # Name of turbinit file
+#
+# INCOMPACT 3D Body forces 
+#
+1     # Immersed Boundary Methods (0 : none, 1 : Old School, 2 : Remy)
+2.25   # X-centre position
+0.75   # Y-centre position
+0.    # Z-centre position
+0.25   # Radius 
+#
+# INCOMPACT Compute Aerodynamic Coefficient
+#
+0       # iaero (1: compute)
+10.      # min x limit of domain
+12.      # min x limit of domain
+14.      # min y limit of domain
+16.      # min y limit of domain
+1.      # min z limit of domain
+1.      # min z limit of domain
+1.      # Front surface
+#
+# INCOMPACT convection naturelle
+#
+1          # iconvect
+1          # ncltx
+1          # nclty 
+0          # ncltz
+0.00001495 #  Ra (> 10**5)   
+9.81         # gravite
+292.       # Temperature ambiante K
+293.       # Temperature de l'obstacle
+0.71       # Pr 
+1.204      # masse volumique de l'eau T0
+1005.0     # Cp	 
+ 
+

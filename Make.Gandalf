@@ -1,0 +1,5 @@
+FF = gfortran-4
+FFLAGS = -ffree-form -O3  -fdefault-real-8 -fdefault-double-8 -fdefault-integer-8
+LDFLAGS =  -ffree-form -O3  -fdefault-real-8 -fdefault-double-8 -fdefault-integer-8
+EXENAME = incompact3d
+

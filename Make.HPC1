@@ -1,0 +1,9 @@
+FF = ifort
+###############Intel#######################################
+FFLAGS =  -fpp:1 -O3 -shared-intel -mcmodel=large -i8 -r8
+LDFLAGS = -fpp:1 -O3 -shared-intel -mcmodel=large -i8 -r8
+###############gfortran#######################################
+#FFLAGS =  -O3  -fdefault-real-8 -fdefault-double-8 -fdefault-integer-8
+#LDFLAGS =  -O3  -fdefault-real-8 -fdefault-double-8 -fdefault-integer-8
+EXENAME = incompact3d
+
