@@ -1,4 +1,4 @@
-include Make.Gandalf
+include Make.Bardwell
 
 .SUFFIXES:
 .SUFFIXES:.o .f90
@@ -48,7 +48,7 @@ clean:
 	@echo
 	@echo "-----------Nettoyage -----------"
 	@echo
-	rm *.o *.mod *.*~ 
+	rm *.o *.mod *.*~  *__genmod.f90
 
 
 include dependance.dep
