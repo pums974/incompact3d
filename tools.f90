@@ -5,6 +5,7 @@ subroutine numcar (num,car)
 !******************************************************************!
 
 character(len=3) car
+integer :: num
 
 if (num.ge.100) then
    write (car,1) num
@@ -113,7 +114,7 @@ if (alpha.ne.0.) then
    if (istret.eq.1) yp(1)=0.
    if (istret.eq.2) yp(1)=0.
    if (istret.eq.1) yeta(1)=0.
-   if (istret.eq.2) yeta(1)=-0.5	
+   if (istret.eq.2) yeta(1)=-0.5
    if (istret.eq.3) yp(1)=0.
    if (istret.eq.3) yeta(1)=-0.5
    do j=2,ny
@@ -294,7 +295,7 @@ do j=1,ny-1
 enddo
 enddo
 !
-utin=utin/utout
+if (abs(utout)>0.) utin=utin/utout
 !
 do k=1,nz
 do j=1,ny

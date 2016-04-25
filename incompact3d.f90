@@ -94,7 +94,7 @@ real(8)                     :: aaaa
 !     AFFICHAGE :
 !
 !        CHAMP DE VORTICITÉ
-           if(mod(itime,500).eq.0) then
+           if(mod(itime,100).eq.0) then
 !            call forcage_flugrange_x(uy)!IBM
             call derx (py,uy,di1,sx,ffxp,fsxp,fwxp,nx,ny,nz,1)
 !            call forcage_flugrange_y(ux)!IBM
@@ -105,7 +105,7 @@ real(8)                     :: aaaa
             do j=1,ny
                do i=1,nx
                   write(10,*)(i-1)*dx,yp(j),pz(i,j,1)
-                  write(20,*) dx*(i-1),yp(j),ux(i,j,1),uy(i,j,1)
+                  write(20,*) dx*(i-1),yp(j),temp(i,j,1) !,uy(i,j,1)
                enddo
                write(10,*)
                write(20,*)

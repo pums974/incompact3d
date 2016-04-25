@@ -617,6 +617,7 @@ do i=2,nx-1
       uy(i,j,1)=2*vertex(lme(i,j,1),6)-vi
 
       if (mod(itime,100).eq.0) then
+      lmin=lme(i,j,1) ! TODO
       write(204,1101) x1,y1,ux(i,j,1),uy(i,j,1)
       write(205,1101) bx,by,vertex(lmin,5),vertex(lmin,6)
       write(206,1101) p1,p2,ui,vi
@@ -697,7 +698,7 @@ do i=2,nx-1
       nghost=nghost+1
       x1=(i-1)*dx
       y1=yp(j)
-      call normal(lme,body,lskin,x1,y1,bx,by,nx,ny,nz,i,j)
+      call normal(lme,x1,y1,bx,by,i,j)
 
       p1=bx
       p2=by
@@ -778,11 +779,12 @@ return
 end subroutine bilinear
 
 SUBROUTINE ludcmp(a,n,np,indx,d)
+integer :: np,n
 real(8),dimension(np,np) :: a
 real(8),dimension(30) :: vv
 integer,dimension(n) :: indx
 real(8) :: d,TINY,aamax,dum,sum
-integer :: n,np,i,imax,j,k
+integer :: i,imax,j,k
 TINY=1.0e-20
 
 d=1.
@@ -844,10 +846,11 @@ SUBROUTINE lubksb(a,n,np,indx,b)
 !
 implicit none
 !
+INTEGER n,np
 real(8),dimension(np,np) :: a
 real(8),dimension(n) :: b
 integer,dimension(n) :: indx
-INTEGER n,np,i,ii,j,ll
+INTEGER i,ii,j,ll
 real(8) :: sum
 !
 ii=0

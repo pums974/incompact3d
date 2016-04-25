@@ -800,9 +800,9 @@ if (iecoule.eq.7) then
       uy(nx,j,1)=0.             
    enddo
    do i=1,nx
-      ux(1,j,1)=0.
-      uy(nx,j,1)=0.
       ux(i,1,1)=0.
+      uy(i,1,1)=0.
+      ux(i,ny,1)=0.
       uy(i,ny,1)=0.             
    enddo
    endif

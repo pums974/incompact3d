@@ -781,8 +781,8 @@ end subroutine polint
 subroutine disque_2d(epsi,nx,ny,dx,dy,r,xc,yc,remp)
    implicit none
 !
-   real(8),dimension(nx,ny,1) :: epsi
    integer                    :: nx,ny
+   real(8),dimension(nx,ny,1) :: epsi
    real(8)                    :: dx,dy
    real(8)                    :: xc,yc,r
    real(8)                    :: remp
@@ -812,9 +812,9 @@ subroutine rectangle_2d(epsi,nx,ny,dx,dy,xri,xrs,yri,yrs,remp)
 !-----------------------------------------------
 !   D u m m y   A r g u m e n t s
 !-----------------------------------------------
+   integer                    :: nx,ny
    real(8),dimension(nx,ny,1) :: epsi
    real(8),dimension(ny)      :: yp
-   integer                    :: nx,ny
    real(8)                    :: dx,dy
    real(8)                    :: xri,xrs
    real(8)                    :: yri,yrs
@@ -849,8 +849,8 @@ end subroutine rectangle_2d
 subroutine quadri_2d(epsi,nx,ny,dx,dy,x1,y1,x2,y2,x3,y3,x4,y4,remp)
    implicit none
 !
-   real(8),dimension(nx,ny,1) :: epsi
    integer                    :: nx,ny
+   real(8),dimension(nx,ny,1) :: epsi
    real(8)                    :: dx,dy
    real(8)                    :: x1,y1
    real(8)                    :: x2,y2
@@ -897,8 +897,8 @@ end subroutine quadri_2d
 subroutine ellipse_2d(epsi,nx,ny,dx,dy,xa,ya,xc,yc,remp)
    implicit none
 !
-   real(8),dimension(nx,ny,1) :: epsi
    integer                    :: nx,ny
+   real(8),dimension(nx,ny,1) :: epsi
    real(8)                    :: dx,dy
    real(8)                    :: xa,ya !longueurs des axes selon x et y
    real(8)                    :: xc,yc !coordonnées du centre de l'ellipse
