@@ -1,3 +1,6 @@
+module tools_m
+implicit none
+contains
 !******************************************************************
 !
 subroutine numcar (num,car)
@@ -1189,3 +1192,4 @@ enddo
  write(*,*) printminmax
 return
 end subroutine minmax
+end module tools_m

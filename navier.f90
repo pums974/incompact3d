@@ -1,3 +1,6 @@
+module navier_m
+implicit none
+contains
 !********************************************************************
 !
 subroutine initial(ux,uy,uz,gx,gy,gz,fx,fy,fz,phi,ppm,temp,gtemp)
@@ -915,3 +918,4 @@ enddo
 
 return
 end subroutine cavite
+end module navier_m

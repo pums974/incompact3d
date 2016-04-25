@@ -1,3 +1,6 @@
+module slfft2d_m
+implicit none
+contains
 !*****************************************************************************************
 !
 subroutine SLFFT2D(x,nx,ny,mx,my,nxm,nym,nwork,work,table,ntrigsX,ntrigsY,isign)
@@ -93,3 +96,4 @@ integer :: i, j
 !
 return
 end subroutine SLFFT2D
+end module slfft2d_m

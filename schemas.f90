@@ -1,3 +1,6 @@
+module schemas_m
+implicit none
+contains
 !********************************************************************
 !
 subroutine schemas()
@@ -1099,3 +1102,4 @@ enddo
 
 return
 end subroutine prepare
+end module schemas_m

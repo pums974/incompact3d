@@ -1,3 +1,6 @@
+module slfft3d_shift_m
+implicit none
+contains
 !*****************************************************************************
 !
 subroutine slfft3d_shift(ppm,tab1,tr,us,ps,wk1,wk2,work,nx,nxm,ny,nym,nz,nzm,&
@@ -1624,3 +1627,4 @@ endif
 !********************************************************************************************************
 return
 end subroutine slfft3d_shift
+end module slfft3d_shift_m

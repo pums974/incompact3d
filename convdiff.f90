@@ -1,3 +1,6 @@
+module convdiff_m
+implicit none
+contains
 !********************************************************************
 !
 subroutine convdiff(ux,uy,uz,sy1,sy2,sy3,sy4,sy5,sy6,sy7,sy8,sy9,sy10,sy11,sy12,di1,di2)
@@ -514,3 +517,4 @@ nxyz1=nx*ny*nz
   endif
 return
 end subroutine convdiff
+end module convdiff_m

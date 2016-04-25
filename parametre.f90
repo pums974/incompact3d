@@ -1,3 +1,6 @@
+module parametre_m
+implicit none
+contains
 !
 !********************************************************************
 !
@@ -295,3 +298,4 @@ if (iaero==1) open(82,file='coeffaero.dat',form='formatted')
 
 return  
 end subroutine parametre
+end module parametre_m

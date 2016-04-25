@@ -1,3 +1,6 @@
+module lorenz_m
+implicit none
+contains
 !***********************************************************
 !
 subroutine lorenz(ux,uy,uz,fx,fy,fz)
@@ -103,7 +106,7 @@ end subroutine magnet
 subroutine magFieldSurface(xBs,yBs,zBs,Br,a,b,Bs)
 !
 !************************************************************
-
+implicit none
 real(8), intent(in) :: xBs,yBs,zBs,Br,a,b  !dimensions in mm
 real(8), dimension(3), intent(out) :: Bs
 real(8), parameter :: Pi=3.14159265
@@ -148,7 +151,7 @@ end subroutine magFieldSurface
 subroutine magFieldMagnet(xBs,yBs,zBs,Br,a,b,thickness,Bs)
 !
 !***********************************************************
-
+implicit none
 real(8), intent(in) :: xBs,yBs,zBs,Br,a,b,thickness
 real(8), dimension(3), intent(out) :: Bs
 
@@ -171,7 +174,7 @@ end subroutine magFieldMagnet
 subroutine changeFrame(xGlobal,zGlobal,angle,xLocal,zLocal) 
 !
 !***********************************************************
-
+implicit none
 real(8), intent(in) :: xGlobal,zGlobal,angle
 real(8), intent(out) :: xLocal,zLocal
 real(8), parameter :: Pi=3.14159265
@@ -194,7 +197,7 @@ subroutine forcing(xfl,yfl,zfl,f)
 USE param
 USE variables
 USE magnets
-
+implicit none
 real(8), intent(in) :: xfl,yfl,zfl
 real(8), dimension(3) :: f
 
@@ -277,7 +280,7 @@ subroutine interpolateForcing(time,time1,time2,fx1,fy1,fz1,fx2,fy2,fz2,fx,fy,fz)
 !
 !***********************************************************
 USE variables
-
+implicit none
 real(8) :: time,time1,time2
 real(8), dimension(nx,ny,nz) :: fx1,fy1,fz1,fx2,fy2,fz2
 real(8), dimension(nx,ny,nz) :: fx,fy,fz
@@ -367,3 +370,4 @@ else
 endif
 
 end subroutine forcingWithInterpolation
+end module lorenz_m

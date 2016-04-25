@@ -1,3 +1,6 @@
+module body_m
+implicit none
+contains
 !*******************************************************************
 !
 subroutine solid_body(ux,uy,uz,epsi,ppm,sy1,sy2,sy3,sy4,sy5,sy6,sy7,sy8,sy9,di1,di2)
@@ -901,3 +904,4 @@ end subroutine lubksb
 
 
 
+end module body_m

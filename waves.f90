@@ -1,3 +1,6 @@
+module waves_m
+implicit none
+contains
 !***********************************************************
 !
 subroutine waves ()
@@ -107,3 +110,4 @@ endif
 !
 return
 end subroutine waves
+end module waves_m

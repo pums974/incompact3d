@@ -1,3 +1,6 @@
+module poisson_m
+implicit none
+contains
 !****************************************************************
 subroutine poisson(ppm,sy7,sy8,sy9,sy10,sy11,sy12,&
                    work,table,a,a3, e,c,a2,sr,a1,b1,d1,d)
@@ -267,3 +270,4 @@ call slfft2d_shift(ppm,tb6,tb1,tb2,tb3,tb4,tb5,work,table,nx,nxm,ny,nym,nz,mx,my
  
 return
 end subroutine poisson_2d
+end module poisson_m

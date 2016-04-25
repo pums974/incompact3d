@@ -1,3 +1,6 @@
+module stats_m
+implicit none
+contains
 !***************************************************************************
 !
 subroutine stats(ux,uy,uz,gx,gy,gz,ppm,phi,phiss,temp,gtemp,&
@@ -153,3 +156,4 @@ close(11)
 
 return
 end subroutine save_restart
+end module stats_m

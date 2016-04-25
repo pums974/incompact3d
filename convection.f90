@@ -1,3 +1,6 @@
+module convection_m
+implicit none
+contains
 !*******************************************************************
 !
 subroutine force_gravite (sy8,sy9,temp)
@@ -326,3 +329,4 @@ end subroutine limittemp
 !
 !*******************************************************************
 !
+end module convection_m

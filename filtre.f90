@@ -1,3 +1,6 @@
+module filtre_m
+implicit none
+contains
 !*********************************************************************
 !
 subroutine filx(tx,ux,rx,sx,vx,fiffx,fifx,ficx,fibx,fibbx,filax,fiz1x,&
@@ -1897,3 +1900,4 @@ print *,'Attention !!!,fihiz=',fih1z,fih2z,fih3z,fih4z
 
 return  
 end subroutine cycliz
+end module filtre_m

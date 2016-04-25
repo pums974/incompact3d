@@ -1,3 +1,6 @@
+module derivevitesse_m
+implicit none
+contains
 !********************************************************************
 !
 subroutine derx(tx,ux,rx,sx,ffx,fsx,fwx,nx,ny,nz,npaire) 
@@ -3705,3 +3708,4 @@ endif
 
 return
 end subroutine interiz6
+end module derivevitesse_m

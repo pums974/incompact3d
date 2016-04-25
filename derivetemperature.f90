@@ -1,3 +1,6 @@
+module derivetemperature_m
+implicit none
+contains
 !********************************************************************
 !
 subroutine dertx (tx,ux,rx,sx,ffx,fsx,fwx,nx,ny,nz,npaire) 
@@ -1730,3 +1733,4 @@ real(8),dimension(nz) :: sfz,ssz,swz
    endif
 return  
 end subroutine dertzz
+end module derivetemperature_m

@@ -1,3 +1,6 @@
+module grille_m
+implicit none
+contains
 ! **************************************************************
 !
    program grille
@@ -140,3 +143,4 @@
      close (10)
 !
    end program grille
+end module grille_m

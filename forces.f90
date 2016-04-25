@@ -1,3 +1,6 @@
+module forces_m
+implicit none
+contains
 !***********************************************************************
 !
 subroutine aerof(ux,uy,uz,ppm,epsi,gx,gy,gz,&
@@ -604,3 +607,4 @@ us =(usb*ys2+ust*ys1)/(yp(j2+2)-yp(j2-1))
 
 return
 end subroutine interpolep
+end module forces_m

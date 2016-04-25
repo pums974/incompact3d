@@ -1,3 +1,6 @@
+module fft_m
+implicit none
+contains
 ! $Header: /home/teuler/cvsroot/lib/jmccfft2d.f90,v 6.7 2000/03/01 17:39:46 teuler Exp $
 ! JMFFTLIB : A library of portable fourier transform subroutines
 !            emulating Cray SciLib
@@ -4737,3 +4740,4 @@ subroutine jmtransp(n,m,l,work,nwork,ioff)
   ioff = ioff2
 
 end subroutine jmtransp
+end module fft_m

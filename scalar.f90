@@ -1,3 +1,6 @@
+module scalar_m
+implicit none
+contains
 !************************************************************
 !
 subroutine scalar(ux,uy,uz,phi,phis,phiss,sy1,sy2,sy3,sy4,sy5,sy6,di1)
@@ -101,3 +104,4 @@ phi=1.
 return
 end subroutine initscalar
 
+end module scalar_m

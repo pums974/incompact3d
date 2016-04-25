@@ -1,3 +1,6 @@
+module geom_complex_m
+implicit none
+contains
 !
 !***************************************************************************
 !***************************************************************************
@@ -922,3 +925,4 @@ subroutine ellipse_2d(epsi,nx,ny,dx,dy,xa,ya,xc,yc,remp)
 !
    return
 end subroutine ellipse_2d
+end module geom_complex_m

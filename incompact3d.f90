@@ -1,3 +1,6 @@
+module incompact3d_m
+implicit none
+contains
 !********************************************************************
 !
 PROGRAM incompact3d
@@ -266,3 +269,4 @@ real(8)                     :: aaaa
 !
 end PROGRAM incompact3d
 
+end module incompact3d_m

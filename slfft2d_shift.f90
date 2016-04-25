@@ -1,3 +1,6 @@
+module slfft2d_shift_m
+implicit none
+contains
 !*****************************************************************************
 !
 subroutine slfft2d_shift(ppm,tb6,tb1,tb2,tb3,tb4,tb5,work,table,nx,nxm,ny,nym,&
@@ -805,3 +808,4 @@ endif
 
 return
 end subroutine slfft2d_shift
+end module slfft2d_shift_m
