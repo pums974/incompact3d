@@ -36,7 +36,7 @@ USE variables
 
 implicit none
 
-integer :: ijk,nlock,nxyz
+integer :: ijk,nlock,nxyz,i,j,k
 real(8),dimension(nx,ny,nz) :: ux,uy,uz,px,py,pz
 
 nxyz=nx*ny*nz
@@ -49,10 +49,15 @@ if (nlock.eq.1) then
          ux(ijk,1,1)=-px(ijk,1,1)+ux(ijk,1,1)
       enddo
    else
-      do ijk=1,nxyz
-         uy(ijk,1,1)=-py(ijk,1,1)+uy(ijk,1,1) 
-         ux(ijk,1,1)=-px(ijk,1,1)+ux(ijk,1,1)
+!      do ijk=1,nxyz ! TODO
+      do k=1,nz
+      do j=1,ny
+      do i=1,nx
+         uy(i,j,k)=-py(i,j,k)+uy(i,j,k) 
+         ux(i,j,k)=-px(i,j,k)+ux(i,j,k)
       enddo
+      enddo
+      enddo      
    endif
 endif
 if (nlock.eq.2) then
@@ -63,9 +68,14 @@ if (nlock.eq.2) then
          ux(ijk,1,1)=px(ijk,1,1)+ux(ijk,1,1)
       enddo
    else
-      do ijk=1,nxyz
-         uy(ijk,1,1)=py(ijk,1,1)+uy(ijk,1,1) 
-         ux(ijk,1,1)=px(ijk,1,1)+ux(ijk,1,1)
+!      do ijk=1,nxyz ! TODO
+      do k=1,nz
+      do j=1,ny
+      do i=1,nx
+         uy(i,j,k)=py(i,j,k)+uy(i,j,k) 
+         ux(i,j,k)=px(i,j,k)+ux(i,j,k)
+      enddo
+      enddo
       enddo
    endif
 endif

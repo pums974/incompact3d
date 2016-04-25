@@ -44,7 +44,7 @@ integer :: i, j
          x2(i,j)=x(2*i,j)
       enddo
       enddo
-      call cfftmlt(x1,x2,work,trigsY,ifaxY,inc,jump,ny,nx,isign)
+      call cfftmlt(x1,x2,work,trigsY,ifaxY,inc,jump,my,mx,isign)
       do j=1,my
       do i=1,mx/2
          x(2*i-1,j)=x1(i,j)
@@ -64,9 +64,9 @@ integer :: i, j
          x2(i,j)=x(2*i,j)
       enddo
       enddo
-      call cfftmlt(x1,x2,work,trigsY,ifaxY,inc,jump,ny,nx,isign)
+      call cfftmlt(x1,x2,work,trigsY,ifaxY,inc,jump,my,mx,isign)
       do j=1,my
-      do i=1,mx/2+2
+      do i=1,mx/2
          x(2*i-1,j)=x1(i,j)
          x(2*i,j)=x2(i,j)
       enddo
