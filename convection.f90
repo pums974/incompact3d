@@ -187,14 +187,14 @@ endif
   reynolds_cyl=umax*0.5/xnu
   cfl=dx*dx*reynolds_cyl/4.
 ! TODO
-!  if (umax>0.) then
-!     cfl1=2./(umax*umax*reynolds_cyl)
-!  else
-!      cfl1=cfl
-!  endif
-!  if (cfl.gt.cfl1) then
-!      cfl=cfl1
-!  endif
+  if (umax>0.) then
+     cfl1=2./(umax*umax*reynolds_cyl)
+  else
+      cfl1=cfl
+  endif
+  if (cfl.gt.cfl1) then
+      cfl=cfl1
+  endif
 ! TODO
   print *,"Umoy :",umoy
   print *,"Umax :",umax
