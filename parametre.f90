@@ -147,7 +147,8 @@ if (ifiltre.eq.0) print *,'Filter            : off'
  1110 format(' Object length     : ',F6.2)
  1113 format(' Schmidt number    : ',F6.2)
 
-if (iconvect == 0) xnu=1./re 
+!if (iconvect == 0)
+ xnu=1./re 
 
 if (iconvect == 1) then
  print *,"convection naturel : on"
