@@ -1601,7 +1601,7 @@ subroutine cfftmlt(xr,xi,work,trigs,ifax,inc,jump,n,m,isign)
 
   ! Arguments
   integer, intent(in) :: inc, jump, n, m, isign
-  real(kind=8), intent(inout), dimension(0:m*n-1) :: xr, xi
+  real(kind=8), intent(inout), dimension(0:(m+1)*(n+1)-1) :: xr, xi
   real(kind=8), intent(out), dimension(0:4*n*m-1) :: work
   real(kind=8), intent(in), dimension(0:2*n-1) :: trigs
   integer, intent(in), dimension(0:nfax-1) :: ifax

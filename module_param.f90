@@ -9,11 +9,11 @@ module variables
 ! If ncl = 0,      --> n  = 2*l
 !                  --> nm = n  
 !                  --> m  = n + 2
-integer,parameter :: nx=257,ny=128,nz=1
-integer,parameter :: nxm=nx-1,nym=ny,nzm=nz 
+integer,parameter :: nx=257,ny=129,nz=1
+integer,parameter :: nxm=nx-1,nym=ny-1,nzm=nz 
 !integer,parameter :: nx=257,ny=129,nz=1
 !integer,parameter :: nxm=nx-1,nym=ny-1,nzm=nz 
-integer,parameter :: mx=nx+1,my=ny+2,mz=nz
+integer,parameter :: mx=nx+1,my=ny+1,mz=nz
 
 integer,parameter :: nwork=512*max(mx,my,mz)
 integer,parameter :: ntrigsX=4*nx,ntrigsY=4*ny,ntrigsZ=4*nz,nfax=19
