@@ -117,16 +117,11 @@ if ((nschema.eq.1.and.itime.eq.1.and.ilit.eq.0).or.&
          gz(ijk,1,1)=hz(ijk,1,1)            
       enddo
    else
-!      do ijk=1,nxyz ! TODO
-      do k=1,nz
-      do j=1,ny
-      do i=1,nx
-         ux(i,j,k)=gdt(itr)*hx(i,j,k)+ux(i,j,k)
-         uy(i,j,k)=gdt(itr)*hy(i,j,k)+uy(i,j,k)   
-         gx(i,j,k)=hx(i,j,k)
-         gy(i,j,k)=hy(i,j,k)
-      enddo
-      enddo
+      do ijk=1,nxyz
+         ux(ijk,1,1)=gdt(itr)*hx(ijk,1,1)+ux(ijk,1,1)
+         uy(ijk,1,1)=gdt(itr)*hy(ijk,1,1)+uy(ijk,1,1)   
+         gx(ijk,1,1)=hx(ijk,1,1)
+         gy(ijk,1,1)=hy(ijk,1,1)
       enddo
    endif
 else
@@ -140,16 +135,11 @@ else
          gz(ijk,1,1)=hz(ijk,1,1)            
       enddo
    else
-!      do ijk=1,nxyz ! TODO
-      do k=1,nz
-      do j=1,ny
-      do i=1,nx
-         ux(i,j,k)=adt(itr)*hx(i,j,k)+bdt(itr)*gx(i,j,k)+ux(i,j,k)
-         uy(i,j,k)=adt(itr)*hy(i,j,k)+bdt(itr)*gy(i,j,k)+uy(i,j,k)   
-         gx(i,j,k)=hx(i,j,k)
-         gy(i,j,k)=hy(i,j,k)
-      enddo
-      enddo
+      do ijk=1,nxyz
+         ux(ijk,1,1)=adt(itr)*hx(ijk,1,1)+bdt(itr)*gx(ijk,1,1)+ux(ijk,1,1)
+         uy(ijk,1,1)=adt(itr)*hy(ijk,1,1)+bdt(itr)*gy(ijk,1,1)+uy(ijk,1,1)   
+         gx(ijk,1,1)=hx(ijk,1,1)
+         gy(ijk,1,1)=hy(ijk,1,1)
       enddo
    endif
 endif
@@ -213,24 +203,14 @@ nxyz=nx*ny*nz
 
 if ((nschema.eq.1.and.itime.eq.1.and.ilit.eq.0).or.&
      (nschema.eq.2.and.itr.eq.1)) then
-!   do ijk=1,nxyz ! TODO
-    do k=1,nz
-    do j=1,ny
-    do i=1,nx
-      temp(i,j,k)=gdt(itr)*htemp(i,j,k)+temp(i,j,k)
-      gtemp(i,j,k)=htemp(i,j,k)            
-   enddo
-   enddo
+   do ijk=1,nxyz
+      temp(ijk,1,1)=gdt(itr)*htemp(ijk,1,1)+temp(ijk,1,1)
+      gtemp(ijk,1,1)=htemp(ijk,1,1)            
    enddo
 else
-!   do ijk=1,nxyz ! TODO
-    do k=1,nz
-    do j=1,ny
-    do i=1,nx
-      temp(i,j,k)=adt(itr)*htemp(i,j,k)+bdt(itr)*gtemp(i,j,k)+temp(i,j,k)
-      gtemp(i,j,k)=htemp(i,j,k)
-   enddo
-   enddo
+   do ijk=1,nxyz
+      temp(ijk,1,1)=adt(itr)*htemp(ijk,1,1)+bdt(itr)*gtemp(ijk,1,1)+temp(ijk,1,1)
+      gtemp(ijk,1,1)=htemp(ijk,1,1)
    enddo
 endif
 
@@ -313,14 +293,9 @@ if (nz.gt.1) then
       ux(ijk,1,1)=-px(ijk,1,1)+ux(ijk,1,1)
    enddo
 else
-!   do ijk=1,nxyz ! TODO
-    do k=1,nz
-    do j=1,ny
-    do i=1,nx
-      uy(i,j,k)=-py(i,j,k)+uy(i,j,k) 
-      ux(i,j,k)=-px(i,j,k)+ux(i,j,k)
-   enddo
-   enddo
+   do ijk=1,nxyz
+      uy(ijk,1,1)=-py(ijk,1,1)+uy(ijk,1,1) 
+      ux(ijk,1,1)=-px(ijk,1,1)+ux(ijk,1,1)
    enddo
 endif
 
@@ -588,16 +563,11 @@ if (nz.gt.1) then
       sy3(i,1,1)=(1.-epsi(i,1,1))*uz(i,1,1)
    enddo
 else
-!   do i=1,nxyz ! TODO
-   do k=1,nz
-   do j=1,ny
-   do i=1,nx
-      sy1(i,j,k)=(1.-epsi(i,j,k))*ux(i,j,k)
-      sy2(i,j,k)=(1.-epsi(i,j,k))*uy(i,j,k)
+   do i=1,nxyz
+      sy1(i,1,1)=(1.-epsi(i,1,1))*ux(i,1,1)
+      sy2(i,1,1)=(1.-epsi(i,1,1))*uy(i,1,1)
 !      sy1(i,1,1)=ux(i,1,1)
 !      sy2(i,1,1)=uy(i,1,1)
-   enddo
-   enddo
    enddo
 endif
 
@@ -870,9 +840,9 @@ if (iecoule.eq.7) then
       uy(nx,j,1)=0.             
    enddo
    do i=1,nx
+      ux(1,j,1)=0.
+      uy(nx,j,1)=0.
       ux(i,1,1)=0.
-      uy(i,1,1)=0.
-      ux(i,ny,1)=0.
       uy(i,ny,1)=0.             
    enddo
    endif

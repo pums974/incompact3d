@@ -329,7 +329,7 @@ real(8) :: dudt1,dudt2,dudt3,dudt4
 real(8) :: uxm,uym
 real(8) :: sumx,sumy,duxdt,duydt
 real(8) :: fxa,fya,fxb,fyb,fxc,fyc,fxd,fyd
-integer :: i,j
+integer :: i,j,k
 
 sumx=0.0
 sumy=0.0
@@ -356,8 +356,8 @@ do i=ild,iud-1
       dudt4 = 1.5*uy(i  ,j+1,1)-2.0*uym1(i  ,j+1,1)+0.5*uym2(i  ,j+1,1)
       duydt = (dudt1+dudt2+dudt3+dudt4)/4.0/dt
 !
-      sumx=sumx+duxdt*dx*(yp(j+1)-yp(j))*(1.-epsi(i,j,1))
-      sumy=sumy+duydt*dx*(yp(j+1)-yp(j))*(1.-epsi(i,j,1))
+      sumx=sumx+duxdt*dx*(yp(j+1)-yp(j))*(1.-epsi(i,j,k))
+      sumy=sumy+duydt*dx*(yp(j+1)-yp(j))*(1.-epsi(i,j,k))
 enddo
 enddo
 

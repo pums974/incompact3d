@@ -1,8 +1,12 @@
-#FF = gfortran
+FF = gfortran
 #FFLAGS = -fPIC -ffree-line-length-none -g -fbacktrace  -fimplicit-none -fall-intrinsics -O0 -g3 -Wall -ffpe-trap=zero,overflow,invalid -Wextra  -finit-real=snan -fcheck=all -Warray-temporaries -Wconversion-extra -Wno-implicit-interface -Wno-implicit-procedure -pedantic -std=f2008ts -Wno-unused-parameter -Wno-unused -Wno-unused-dummy-argument -fdefault-real-8 -fdefault-double-8
 #LDFLAGS =  -fPIC -ffree-line-length-none -g -fbacktrace  -fimplicit-none -fall-intrinsics -O0 -g3 -Wall -ffpe-trap=zero,overflow,invalid -Wextra  -finit-real=snan -fcheck=all -Warray-temporaries -Wconversion-extra -Wno-implicit-interface -Wno-implicit-procedure -pedantic -std=f2008ts -Wno-unused-parameter -Wno-unused -Wno-unused-dummy-argument -fdefault-real-8 -fdefault-double-8
-FF = ifort
-FFLAGS = -fPIC -g  -traceback -O0 -check all -debug all -warn all,nounused -fpe0 -ftrapuv -init=snan -WB -u -gen-interfaces -r8
-LDFLAGS = -fPIC -g  -traceback -O0 -check all -debug all -warn all,nounused -fpe0 -ftrapuv -init=snan -WB -u -gen-interfaces -r8
+FFLAGS = -fPIC -ffree-line-length-none -g -fbacktrace  -fimplicit-none -fall-intrinsics -O3 -finit-real=zero -fdefault-real-8 -fdefault-double-8
+LDFLAGS = -fPIC -ffree-line-length-none -g -fbacktrace  -fimplicit-none -fall-intrinsics -O3 -finit-real=zero -fdefault-real-8 -fdefault-double-8
+#FF = ifort
+#FFLAGS = -fPIC -g  -traceback -O0 -check all -debug all -warn all,nounused -fpe0 -ftrapuv -init=snan -WB -u -gen-interfaces -r8
+#LDFLAGS = -fPIC -g  -traceback -O0 -check all -debug all -warn all,nounused -fpe0 -ftrapuv -init=snan -WB -u -gen-interfaces -r8
+#FFLAGS = -fPIC -g  -traceback -O3 -init=zero -r8
+#LDFLAGS = -fPIC -g  -traceback -O3 -init=zero -r8
 EXENAME = incompact3d
 

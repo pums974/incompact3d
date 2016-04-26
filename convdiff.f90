@@ -362,41 +362,26 @@ nxyz1=nx*ny*nz
          enddo
 !
       else!2D
-!         do ijk=1,nxyz1 ! TODO
-         do k=1,nz
-         do j=1,ny
-         do i=1,nx
-            sy1(i,j,k)=ux(i,j,k)*ux(i,j,k)
-            sy4(i,j,k)=uy(i,j,k)*uy(i,j,k)
-            sy3(i,j,k)=ux(i,j,k)*uy(i,j,k)
-         enddo
-         enddo
+         do ijk=1,nxyz1
+            sy1(ijk,1,1)=ux(ijk,1,1)*ux(ijk,1,1)
+            sy4(ijk,1,1)=uy(ijk,1,1)*uy(ijk,1,1)
+            sy3(ijk,1,1)=ux(ijk,1,1)*uy(ijk,1,1)
          enddo
          call derx (sy2,sy1,di1,sx,ffxp,fsxp,fwxp,nx,ny,nz,1)
          call dery (sy7,sy4,di1,di2,sy,ffyp,fsyp,fwyp,ppy,nx,ny,nz,1)
          call derx (sy1,sy3,di1,sx,ffxp,fsxp,fwxp,nx,ny,nz,1)
          call dery (sy4,sy3,di1,di2,sy,ffy,fsy,fwy,ppy,nx,ny,nz,0)
-!         do ijk=1,nxyz1 ! TODO
-         do k=1,nz
-         do j=1,ny
-         do i=1,nx
-            sy2(i,j,k)=sy2(i,j,k)+sy4(i,j,k)
-            sy7(i,j,k)=sy7(i,j,k)+sy1(i,j,k)
-         enddo
-         enddo
+         do ijk=1,nxyz1
+            sy2(ijk,1,1)=sy2(ijk,1,1)+sy4(ijk,1,1)
+            sy7(ijk,1,1)=sy7(ijk,1,1)+sy1(ijk,1,1)
          enddo
          call derx (sy1,ux,di1,sx,ffxp,fsxp,fwxp,nx,ny,nz,1)
          call dery (sy4,uy,di1,di2,sy,ffy,fsy,fwy,ppy,nx,ny,nz,0)
          call derx (sy3,uy,di1,sx,ffxp,fsxp,fwxp,nx,ny,nz,1)
          call dery (sy5,ux,di1,di2,sy,ffyp,fsyp,fwyp,ppy,nx,ny,nz,1)
-!         do ijk=1,nxyz1 ! TODO
-         do k=1,nz
-         do j=1,ny
-         do i=1,nx
-            sy2(i,j,k)=0.5*(sy2(i,j,k)+ux(i,j,k)*sy1(i,j,k)+uy(i,j,k)*sy5(i,j,k))
-            sy7(i,j,k)=0.5*(sy7(i,j,k)+uy(i,j,k)*sy4(i,j,k)+ux(i,j,k)*sy3(i,j,k))
-         enddo
-         enddo
+         do ijk=1,nxyz1
+            sy2(ijk,1,1)=0.5*(sy2(ijk,1,1)+ux(ijk,1,1)*sy1(ijk,1,1)+uy(ijk,1,1)*sy5(ijk,1,1))
+            sy7(ijk,1,1)=0.5*(sy7(ijk,1,1)+uy(ijk,1,1)*sy4(ijk,1,1)+ux(ijk,1,1)*sy3(ijk,1,1))
          enddo
       endif
    endif

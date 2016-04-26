@@ -54,14 +54,9 @@ if (nlock.eq.1) then
          ux(ijk,1,1)=-px(ijk,1,1)+ux(ijk,1,1)
       enddo
    else
-!      do ijk=1,nxyz ! TODO
-      do k=1,nz
-      do j=1,ny
-      do i=1,nx
-         uy(i,j,k)=-py(i,j,k)+uy(i,j,k) 
-         ux(i,j,k)=-px(i,j,k)+ux(i,j,k)
-      enddo
-      enddo
+      do ijk=1,nxyz
+         uy(ijk,1,1)=-py(ijk,1,1)+uy(ijk,1,1) 
+         ux(ijk,1,1)=-px(ijk,1,1)+ux(ijk,1,1)
       enddo      
    endif
 endif
@@ -73,14 +68,9 @@ if (nlock.eq.2) then
          ux(ijk,1,1)=px(ijk,1,1)+ux(ijk,1,1)
       enddo
    else
-!      do ijk=1,nxyz ! TODO
-      do k=1,nz
-      do j=1,ny
-      do i=1,nx
-         uy(i,j,k)=py(i,j,k)+uy(i,j,k) 
-         ux(i,j,k)=px(i,j,k)+ux(i,j,k)
-      enddo
-      enddo
+      do ijk=1,nxyz
+         uy(ijk,1,1)=py(ijk,1,1)+uy(ijk,1,1) 
+         ux(ijk,1,1)=px(ijk,1,1)+ux(ijk,1,1)
       enddo
    endif
 endif
@@ -893,17 +883,5 @@ enddo
 !
 return
 end subroutine lubksb
-
-
-
-
-
-
-
-
-
-
-
-
 
 end module body_m

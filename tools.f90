@@ -298,7 +298,7 @@ do j=1,ny-1
 enddo
 enddo
 !
-if (abs(utout)>0.) utin=utin/utout
+utin=utin/utout
 !
 do k=1,nz
 do j=1,ny
