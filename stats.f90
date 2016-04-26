@@ -1,4 +1,6 @@
 module stats_m
+  use tools_m
+  use forces_m
 implicit none
 contains
 !***************************************************************************

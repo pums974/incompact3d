@@ -4,29 +4,29 @@ include Make.Bardwell
 .SUFFIXES:.o .f90
 
 OBJS=\
-body.o \
-convdiff.o \
-convection.o \
+tools.o \
+module_param.o \
 derivevitesse.o \
+scalar.o \
+filtre.o \
+geom_complex.o \
+convdiff.o \
 derivetemperature.o \
 fft.o \
-filtre.o \
 forces.o \
-geom_complex.o \
-incompact3d.o \
 lorenz.o \
-module_param.o \
-navier.o \
 parametre.o \
-poisson.o \
-scalar.o \
-schemas.o \
 slfft2d.o \
 slfft2d_shift.o \
 slfft3d_shift.o \
+poisson.o \
+schemas.o \
 stats.o \
-tools.o \
-waves.o
+waves.o \
+navier.o \
+convection.o \
+body.o \
+incompact3d.o
 
 SRC=*.f90
 

@@ -1,4 +1,5 @@
 module slfft3d_shift_m
+  use fft_m
 implicit none
 contains
 !*****************************************************************************

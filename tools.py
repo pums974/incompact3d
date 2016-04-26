@@ -106,12 +106,15 @@ for fich in glob.glob('*.f90'):
         list_file = []
         for fx in list_fx:
             fich1 = fx_to_file(fx)
-            if fich1 and fich1 is not fich and fich1 not in list_file:
+            if fich1 and not fich1 == fich and fich1 not in list_file:
                 list_file.append(fich1)
-        list_use = []
-        for fich1 in list_file:
-            list_use.append(fich1.replace(".f90", "_m"))
-        add_uses(fich, list_use)
+        if list_file:
+            list_use = []
+            for fich1 in list_file:
+                list_use.append(fich1.replace(".f90", "_m"))
+            add_uses(fich, list_use)
+#            print(fich),
+#            print(list_use)
 
 
 

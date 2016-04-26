@@ -1,4 +1,7 @@
 module navier_m
+  use derivevitesse_m
+  use scalar_m
+  use tools_m
 implicit none
 contains
 !********************************************************************
@@ -248,6 +251,41 @@ endif
 
 return
 end subroutine intt_temperature
+!
+!*******************************************************************
+!
+subroutine inittemp (temp)
+!
+!*******************************************************************
+
+USE param
+USE IBM 
+USE variables
+USE convection
+
+implicit none
+
+real(8),dimension(nx,ny,nz) :: temp
+integer :: j, i, k
+if (nz.gt.1) then
+   do k=1,nz
+   do j=1,ny 
+   do i=1,nx
+      temp(i,j,k)=T0 
+   enddo
+   enddo
+   enddo
+else
+   do j=1,ny
+   do i=1,nx
+      temp(i,j,1)=T0
+   enddo
+   enddo
+endif
+
+return
+
+end subroutine inittemp
 
 !********************************************************************
 !
@@ -345,7 +383,6 @@ implicit none
 integer  :: k,j,idum
 real(8),dimension(nx,ny,nz) :: ux,uy,uz
 real(8) :: r1,r2,r3,y,um
-real(8),external :: rand2 
 
 idum=-67
 

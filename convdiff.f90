@@ -1,4 +1,7 @@
 module convdiff_m
+  use geom_complex_m
+  use derivevitesse_m
+  use filtre_m
 implicit none
 contains
 !********************************************************************

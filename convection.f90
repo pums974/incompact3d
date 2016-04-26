@@ -1,4 +1,6 @@
 module convection_m
+  use derivetemperature_m
+  use navier_m
 implicit none
 contains
 !*******************************************************************
@@ -209,41 +211,6 @@ endif
   !enddo
 return
 end subroutine energie
-!
-!*******************************************************************
-!
-subroutine inittemp (temp)
-!
-!*******************************************************************
-
-USE param
-USE IBM 
-USE variables
-USE convection
-
-implicit none
-
-real(8),dimension(nx,ny,nz) :: temp
-integer :: j, i, k
-if (nz.gt.1) then
-   do k=1,nz
-   do j=1,ny 
-   do i=1,nx
-      temp(i,j,k)=T0 
-   enddo
-   enddo
-   enddo
-else
-   do j=1,ny
-   do i=1,nx
-      temp(i,j,1)=T0
-   enddo
-   enddo
-endif
-
-return
-
-end subroutine inittemp
 !*******************************************************************
 !
 subroutine limittemp (temp)

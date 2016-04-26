@@ -1,4 +1,5 @@
 module scalar_m
+  use derivevitesse_m
 implicit none
 contains
 !************************************************************

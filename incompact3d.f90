@@ -1,6 +1,3 @@
-module incompact3d_m
-implicit none
-contains
 !********************************************************************
 !
 PROGRAM incompact3d
@@ -12,6 +9,20 @@ USE derivX;USE derivY;USE derivZ
 USE aeroforce
 USE variables
 USE convection
+use parametre_m
+use filtre_m
+use schemas_m
+use waves_m
+use navier_m
+use geom_complex_m
+use convdiff_m
+use scalar_m
+use convection_m
+use body_m
+use tools_m
+use poisson_m
+use stats_m
+use derivevitesse_m
 
 implicit none
 
@@ -20,7 +31,8 @@ real(8),dimension(nx,ny,nz) :: temp,gtemp,htemp
 real(8),dimension(nx,ny,nz,nphi) :: phi,phis,phiss
 real(8),dimension(nx,ny,nz) :: sy1,sy2,sy3,sy4,sy5,sy6
 real(8),dimension(mx,my,mz) :: sy7,sy8,sy9,sy10,sy11,sy12
-real(8),dimension(nx,ny,nz) :: di1,di2,epsi
+real(8),dimension(nx,ny,nz) :: epsi
+real(8),dimension(mx,my,mz) :: di2,di1 ! TODO
 real(8),dimension(nxm,nym,nzm) :: ppm,ppm1!,err
 real(8),dimension(nx,ny,nz) :: uxm1,uym1,uzm1,uxm2,uym2,uzm2
 !
@@ -30,8 +42,8 @@ real(8),dimension(mx,mz,ny) :: d,d1,e,c
 real(8),dimension(mx,mz) :: sr
 real(8),dimension(mx,mz) :: a1,b1
 !
-real(8),dimension(nwork) :: work
-real(8),dimension(100+2*(nxm+nym+nzm)) :: table
+real(8),dimension(nwork) :: work,table
+!real(8),dimension(100+2*(nxm+nym+nzm)) :: table
 !
 real(8),dimension(nxm,nym,nzm) :: epsidec
 real(8),dimension(nx,ny,nz) :: px,py,pz
@@ -269,4 +281,3 @@ real(8)                     :: aaaa
 !
 end PROGRAM incompact3d
 
-end module incompact3d_m

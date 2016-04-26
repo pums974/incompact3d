@@ -1,4 +1,5 @@
 module forces_m
+  use derivevitesse_m
 implicit none
 contains
 !***********************************************************************

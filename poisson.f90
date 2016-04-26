@@ -1,4 +1,7 @@
 module poisson_m
+  use slfft3d_shift_m
+  use tools_m
+  use slfft2d_shift_m
 implicit none
 contains
 !****************************************************************

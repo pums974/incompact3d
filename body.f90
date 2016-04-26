@@ -1,4 +1,5 @@
 module body_m
+  use navier_m
 implicit none
 contains
 !*******************************************************************
@@ -16,8 +17,9 @@ implicit none
 real(8),dimension(nx,ny,nz) :: ux,uy,uz,epsi
 real(8),dimension(nx,ny,nz) :: sy1,sy2,sy3
 real(8),dimension(nx,ny,nz) :: sy4,sy5,sy6
-real(8),dimension(nx,ny,nz) :: sy7,sy8,sy9,di1,di2
+real(8),dimension(nx,ny,nz) :: sy7,sy8,sy9
 real(8),dimension(nxm,nym,nz) :: ppm
+real(8),dimension(mx,my,mz) :: di2,di1 ! TODO
 
    call gradpression(ppm,sy1,sy2,sy3,sy4,sy5,sy6,sy7,sy8,sy9,di1,di2)
    call corgp_IBM(ux,uy,uz,sy1,sy2,sy3,1)
