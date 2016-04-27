@@ -66,10 +66,6 @@ if (static AND hostname STREQUAL "hulk")
     set(static OFF)
 endif()
 
-find_library(FFTW_LIBRARY NAMES fftw3 fftw)
-find_path(FFTW_INCLUDES   NAMES "fftw3.f03"  PATHS ${PKG_FFTW_INCLUDE_DIRS} ${INCLUDE_INSTALL_DIR})
-include_directories(${FFTW_INCLUDES})
-
 ### On rajoutes les flags des options  ###
 
 message( STATUS "")
@@ -116,6 +112,11 @@ message( STATUS "===============================================================
 message( STATUS "")
 
 
+find_library(FFTW_LIBRARY NAMES fftw3)
+find_library(FFTW_thread_LIBRARY NAMES fftw3_threads)
+find_library(pthread_LIBRARY NAMES pthread)
+find_path(FFTW_INCLUDES   NAMES "fftw3.f03"  PATHS ${PKG_FFTW_INCLUDE_DIRS} ${INCLUDE_INSTALL_DIR})
+include_directories(${FFTW_INCLUDES})
 
 ### Définitions des dépendances  ###
 
@@ -130,7 +131,7 @@ FILE(GLOB SRC_FILES "*.[fF]90" )
 list(REMOVE_ITEM SRC_FILES "${CMAKE_CURRENT_LIST_DIR}/grille.f90")
 
 add_executable(incompact3D ${SRC_FILES})
-target_link_libraries(incompact3D ${FFTW_LIBRARY})
+target_link_libraries(incompact3D ${FFTW_LIBRARY} ${FFTW_thread_LIBRARY} ${pthread_LIBRARY})
 
 
 ### Autre (LTO et STATIC)  ###

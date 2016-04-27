@@ -60,6 +60,7 @@ real(8)                     :: aaaa
    call waves ()  
    call initial (ux,uy,uz,gx,gy,gz,fx,fy,fz,phi,ppm,temp,gtemp)
    
+   call init_SLFFT2D(nxm,nym)
    if (ivirtuel.eq.2) then !new method
        call gene_epsi(epsi,epsidec)
        call verif_epsi(epsi)
@@ -71,6 +72,10 @@ real(8)                     :: aaaa
       write(*,1001) itime,t
  1001 format('Time step =',i7,', Time unit =',F9.3)
       call time_measure (0)
+      if (itime==idebut+1) then
+        ntics=0
+        average_t=0.
+      endif
       do itr=1,iavance_temps
 !        
          call inflow    (ux,uy,uz)
@@ -280,6 +285,7 @@ real(8)                     :: aaaa
 !         endif
 !stop
    enddo
+   call end_SLFFT2D
 !
 end PROGRAM incompact3d
 

@@ -2,7 +2,7 @@ module tools_m
 implicit none
 
 integer(kind=8) :: t0,t1,t2,t3,t4,t5,t6,t7,ir,ntics=0
-double precision :: average_t
+double precision :: average_t=0.
 contains
 !******************************************************************
 !
