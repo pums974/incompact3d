@@ -70,6 +70,7 @@ real(8)                     :: aaaa
       t=(itime-1)*dt
       write(*,1001) itime,t
  1001 format('Time step =',i7,', Time unit =',F9.3)
+      call time_measure (0)
       do itr=1,iavance_temps
 !        
          call inflow    (ux,uy,uz)
@@ -103,6 +104,7 @@ real(8)                     :: aaaa
                            sy7,sy8,sy9,sy10,sy11,sy12,&
                            epsi,sy1,sy2,sy3,work,table,2)
       enddo
+      call time_measure (1)
       call stats       (ux,uy,uz,gx,gy,gz,ppm,phi,phiss,temp,gtemp,epsi,&
                         sy1,sy2,sy3,sy4,sy5,sy6,di1,di2,sy7,sy8,sy9,&
                         uxm1,uym1,uzm1,uxm2,uym2,uzm2)

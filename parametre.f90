@@ -13,7 +13,7 @@ USE IBM
 USE aeroforce
 USE variables
 USE convection
-use tools_m
+use tools_m,only : stretching
 implicit none
 
 real(8) :: re, theta, cfl,cf2,Long_adi 
