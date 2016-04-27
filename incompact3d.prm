@@ -9,7 +9,7 @@
 1.   # u1 (max velocity) 
 1.   # u2 (min velocity) 
 0.   # Turbulence intensity (1=100%)
-0.001  # Time step
+0.005  # Time step
 #
 # INCOMPACT3D Flow configuration
 #
@@ -19,7 +19,7 @@
 7      # Type of flow (iecoule) 
 0      # Inflow condition (1: classic, 2: turbinit)
 1      # First iteration (idebut)  
-6000   # Last iteration (ifin)
+10000   # Last iteration (ifin)
 1      # Temporal scheme (1:AB2, 2: RK3, 3:RK4)
 0      # y mesh refinement (0:nonen, 1:center, 2:both sides, 3:bottom)
 10     # Refinement parameter (beta) 
@@ -65,7 +65,7 @@ condent.dat    # Name of turbinit file
 1          # ncltx
 1          # nclty 
 0          # ncltz
-0.00001495 #  Ra (> 10**5)   
+0.0001495 #  Ra (> 10**5)   
 9.81         # gravite
 292.       # Temperature ambiante K
 293.       # Temperature de l'obstacle
