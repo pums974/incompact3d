@@ -10,90 +10,94 @@ subroutine SLFFT2D(x,nx,ny,mx,my,nxm,nym,nwork,work,table,ntrigsX,ntrigsY,isign)
 
 USE param
   
-implicit none
+  use, intrinsic :: iso_c_binding
+  implicit none
+  include 'fftw3.f03'
 
 integer, intent(in) :: nx,ny,mx,my,nxm,nym,nwork,ntrigsX,ntrigsY
 integer, intent(in) :: isign
 real(8),  intent(inout), dimension(mx,my) :: x
+real(8),  dimension(mx,my) :: x5
 real(8), dimension(nwork) :: work,table
 real(8), dimension(mx,my) :: x1,x2
-real(8), dimension(0:ntrigsX-1) :: trigsX
-real(8), dimension(0:ntrigsY-1) :: trigsY
-integer, parameter :: nfax = 19
-integer, dimension(0:nfax-1) :: ifaxX, ifaxY
+real(8), dimension(nx,ny) :: x3,x4
 integer :: inc, jump
 integer :: i, j
 
+  complex(C_DOUBLE_COMPLEX) :: fftw_cmp_x(nx),fftw_cmp_y(ny)
+  real(C_double) :: fftw_real_x(nx),fftw_real_y(ny)
+  type(C_PTR) :: fftw_plan_x1,fftw_plan_y,fftw_plan_x2
+
+
 !************************FFT2D***(0-0)***********************************
     
-   ! Initialisation des factorisations et tableaux trigonométrique
-   ! Note : L'appel a jmcftfax calcule les cos et sin(2*pi/n), tandis
-   ! que les appels suivants calculent les cos(pi/n)
-   ! Il y a un peu de gaspillage, mais c'est plus simple comme ca
-   
-   call fftfax(nxm,ifaxX,trigsX)
-   call cftfax(nym,ifaxY,trigsY)
+      fftw_plan_x1 = fftw_plan_dft_r2c_1d(nx, &
+                                    fftw_real_x, fftw_cmp_x, &
+                                    FFTW_ESTIMATE)
+                                    
+      fftw_plan_x2 = fftw_plan_dft_c2r_1d(nx, &
+                                    fftw_cmp_x, fftw_real_x, &
+                                    FFTW_ESTIMATE)
+                                    
+     fftw_plan_y = fftw_plan_dft_1d(ny,   &
+                                fftw_cmp_y, fftw_cmp_y,&
+                                isign, FFTW_ESTIMATE);
 
    if (isign==-1) then
       ! On applique une TF reelle->complexe aux colonnes de ce tableau
-      inc = 1
-      jump = mx
-      call rfftmlt(x,work,trigsX,ifaxX,inc,jump,nx,ny,isign)
+      do j=1,ny
+        fftw_real_x=x(1:nx,j)
+        call fftw_execute_dft_r2c(fftw_plan_x1, fftw_real_x, fftw_cmp_x)
+        x3(:,j)=real(fftw_cmp_x)/nym/2
+        x4(:,j)=aimag(fftw_cmp_x)/nym/2
+      enddo
+      
       ! On applique une TF complexe->complexe aux lignes de ce tableau
-      inc = mx
-      jump = 1
-      do j=1,my
+      do i=1,nx
+        fftw_cmp_y=cmplx(x3(i,1:ny),x4(i,1:ny))
+        call fftw_execute_dft(fftw_plan_y, fftw_cmp_y, fftw_cmp_y)
+        x3(i,:)=real(fftw_cmp_y)
+        x4(i,:)=aimag(fftw_cmp_y)
+      enddo        
+      
+      do j=1,ny
       do i=1,mx/2
-         x1(i,j)=x(2*i-1,j)
-         x2(i,j)=x(2*i,j)
-      enddo
-      enddo
-      call cfftmlt(x1,x2,work,trigsY,ifaxY,inc,jump,ny,nx,isign)
-      do j=1,my
-      do i=1,mx/2
-         x(2*i-1,j)=x1(i,j)
-         x(2*i,j)=x2(i,j)
+         x(2*i-1,j)=x3(i,j)
+         x(2*i,j)=x4(i,j)
       enddo
       enddo
       x(:,:)=x(:,:)/nym
    endif
-
+   
    if (isign==1) then
       ! On applique une TF complexe->complexe aux lignes de ce tableau
-      inc = mx
-      jump = 1
       do j=1,my
       do i=1,mx/2
          x1(i,j)=x(2*i-1,j)
          x2(i,j)=x(2*i,j)
       enddo
       enddo
-      call cfftmlt(x1,x2,work,trigsY,ifaxY,inc,jump,ny,nx,isign)
-      do j=1,my
-      do i=1,mx/2
-         x(2*i-1,j)=x1(i,j)
-         x(2*i,j)=x2(i,j)
+      
+      do i=1,nx
+        fftw_cmp_y=cmplx(x1(i,1:ny),x2(i,1:ny))
+        call fftw_execute_dft(fftw_plan_y, fftw_cmp_y, fftw_cmp_y)
+        x3(i,:)=real(fftw_cmp_y)
+        x4(i,:)=aimag(fftw_cmp_y)
+      enddo      
+
+      ! On applique une TF reelle<-complexe aux colonnes de ce tableau
+      do j=1,ny
+        fftw_cmp_x=cmplx(x3(1:nx,j),x4(1:nx,j))
+        call fftw_execute_dft_c2r(fftw_plan_x2, fftw_cmp_x, fftw_real_x)
+        x(1:nx,j)=fftw_real_x
       enddo
-      enddo
-      ! On applique une TF reelle->complexe aux colonnes de ce tableau
-      inc = 1
-      jump = mx
-      call rfftmlt(x,work,trigsX,ifaxX,inc,jump,nx,ny,isign)
-      x(:,:)=x(:,:)
+      
    endif
-!
-!*************VERSION QUI MARCHE***********************************    
-!        call scfft2d(0,nx,ny,1.,x,mx,x,nxm/2+1,table,work,0)
-!     if ( isign== -1) then
-!        call scfft2d(isign,nx,ny,1.,x,mx,x,nxm/2+1,table,work,0)
-!        x(:,:)=x(:,:)/nxm/nym
-!     endif
-!     if ( isign==  1) then 
-!        call csfft2d(isign,nx,ny,1.,x,nxm/2+1,x,mx,table,work,0)
-!        x(:,:)=x(:,:)
-!     endif
-! 
-!******************************************************************
+   
+      call fftw_destroy_plan(fftw_plan_x1)
+      call fftw_destroy_plan(fftw_plan_x2)
+      call fftw_destroy_plan(fftw_plan_y)
+   
 !
 return
 end subroutine SLFFT2D
