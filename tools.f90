@@ -1,5 +1,8 @@
 module tools_m
 implicit none
+
+integer(kind=8) :: t0,t1,t2,t3,t4,t5,t6,t7,ir,ntics=0
+double precision :: average_t
 contains
 !******************************************************************
 !
@@ -1172,7 +1175,7 @@ implicit none
 integer :: i,j,k,n,nimax,njmax
 real(8) :: umax,umin
 real(8),dimension(nx,ny,nz) :: u
-character*45 :: printminmax
+character(len=45) :: printminmax
 character :: car*2
 
 umax=-10000.
@@ -1192,4 +1195,69 @@ enddo
  write(*,*) printminmax
 return
 end subroutine minmax
+
+
+subroutine time_measure (n)
+!use general
+!use allocation
+!
+implicit none
+integer :: n,ncpt=0
+double precision :: temps_local,delta_t=0.
+
+if (n == 0) then
+call system_clock (count=t0, count_rate=ir)
+endif
+
+if (n == 1) then
+call system_clock (count=t1, count_rate=ir)
+temps_local = real(t1 - t0,kind=8)/real(ir,kind=8)
+ntics=ntics+1
+average_t=average_t+temps_local
+PRINT 11, ncpt, ncpt*delta_t,temps_local
+print*,""
+print*,"ALEX : average time = ",average_t/ntics
+print*,""
+endif
+
+!##############OUTPUT##############
+if (n == 2) then
+  call system_clock (count=t2, count_rate=ir)
+endif
+
+if (n == 3) then
+  call system_clock (count=t3, count_rate=ir)
+  temps_local = real(t3 - t2,kind=8)/real(ir,kind=8)
+  PRINT 12, temps_local
+endif
+
+!##############INPUT##############
+if (n == 4) then
+  call system_clock (count=t4, count_rate=ir)
+endif
+
+if (n == 5) then
+  call system_clock (count=t5, count_rate=ir)
+  temps_local = real(t5 - t4,kind=8)/real(ir,kind=8)
+  PRINT 13, temps_local
+endif
+
+!##############BACKUP##############
+if (n == 6) then
+  call system_clock (count=t6, count_rate=ir)
+endif
+
+if (n == 7) then
+  call system_clock (count=t7, count_rate=ir)
+  temps_local = real(t7 - t6,kind=8)/real(ir,kind=8)
+  PRINT 14, temps_local
+endif
+
+11    FORMAT  ( 'it = ',I6,' Convergence time : ',f20.8, "Time (Elapsed Time : )",f20.8)
+12    FORMAT  (' I/O Time ADIOS or VTK files', f20.8)
+13    FORMAT  (' Input read file time', f20.8)
+14    FORMAT  (' I/O Time Backup', f20.8)
+
+end subroutine time_measure 
+
 end module tools_m
