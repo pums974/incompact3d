@@ -29,8 +29,8 @@ if (CMAKE_Fortran_COMPILER_ID STREQUAL "Intel")
   set(CMAKE_Fortran_FLAGS_DEBUG   "-O0 -C -debug all -warn all,nounused -fpe0 -ftrapuv -fstack-protector-all -WB -fp-stack-check -u -gen-interfaces -stand f08 -warn nodeclarations") #  
   set(DOUBLE_FLAGS "-r8")
   set(OPTRPT_FLAGS "-qopt-report=5 -guide -diag-enable=openmp,vec,par")
-  set(LTO_FLAGS    "-ipo -ipo-jobs=8")
-  set(OPENMP_FLAGS "-openmp -parallel -threads")
+  set(LTO_FLAGS    "-ipo -ipo-jobs=4")
+  set(OPENMP_FLAGS "-qopenmp")
 endif ()
 
 # gfortran compiler (LINUX)
@@ -73,14 +73,17 @@ message( STATUS "===============================================================
 message( STATUS "")
 message( STATUS "Compilation de Incompact3D sur : " ${hostname})
 message( STATUS "Fortran compiler: " ${CMAKE_Fortran_COMPILER} " - " ${CMAKE_Fortran_COMPILER_ID} " - " ${COMPILER_VERSION})
-
+find_library(FFTW_LIBRARY NAMES fftw3)
 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${DOUBLE_FLAGS}")
 
 if( openmp )
   set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${OPENMP_FLAGS}")
   message( STATUS "With      OpenMP")
+  find_library(FFTW_thread_LIBRARY NAMES fftw3_omp)
 else()
   message( STATUS "Without   OpenMP")
+  find_library(FFTW_thread_LIBRARY NAMES fftw3_threads)
+  find_library(pthread_LIBRARY NAMES pthread)
 endif()
 if( profile )
   set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${PROFILE_FLAGS}")
@@ -112,9 +115,6 @@ message( STATUS "===============================================================
 message( STATUS "")
 
 
-find_library(FFTW_LIBRARY NAMES fftw3)
-find_library(FFTW_thread_LIBRARY NAMES fftw3_threads)
-find_library(pthread_LIBRARY NAMES pthread)
 find_path(FFTW_INCLUDES   NAMES "fftw3.f03"  PATHS ${PKG_FFTW_INCLUDE_DIRS} ${INCLUDE_INSTALL_DIR})
 include_directories(${FFTW_INCLUDES})
 
@@ -131,8 +131,11 @@ FILE(GLOB SRC_FILES "*.[fF]90" )
 list(REMOVE_ITEM SRC_FILES "${CMAKE_CURRENT_LIST_DIR}/grille.f90")
 
 add_executable(incompact3D ${SRC_FILES})
-target_link_libraries(incompact3D ${FFTW_LIBRARY} ${FFTW_thread_LIBRARY} ${pthread_LIBRARY})
-
+if( openmp )
+  target_link_libraries(incompact3D ${FFTW_LIBRARY} ${FFTW_thread_LIBRARY})
+else()
+  target_link_libraries(incompact3D ${FFTW_LIBRARY} ${FFTW_thread_LIBRARY} ${pthread_LIBRARY})
+endif()
 
 ### Autre (LTO et STATIC)  ###
 

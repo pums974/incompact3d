@@ -92,8 +92,9 @@ integer,parameter :: FFTW_FLAG=FFTW_ESTIMATE
        call c_f_pointer(p1, fftw_cmp_x, [nx,ny])
        call c_f_pointer(p2, fftw_cmp_y, [ny,nx])
 
-     err=fftw_init_threads()
-     call fftw_plan_with_nthreads(1)
+!     err=fftw_init_threads()
+!     print*,err
+!     call fftw_plan_with_nthreads(1)
 
       fftw_plan_x1 = fftw_plan_dft_r2c_1d(nx, &
                                     x(1:nx,1), fftw_cmp_x(1:nx,1), &
@@ -122,7 +123,7 @@ implicit none
            call fftw_free(p1)
            call fftw_free(p2)
       
-      call fftw_cleanup_threads()
+!      call fftw_cleanup_threads()
       
 end subroutine end_SLFFT2D
 

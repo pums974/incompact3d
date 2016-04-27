@@ -9,7 +9,7 @@ module variables
 ! If ncl = 0,      --> n  = 2*l
 !                  --> nm = n  
 !                  --> m  = n + 2
-integer,parameter :: nx=2049,ny=513,nz=1
+integer,parameter :: nx=1025,ny=513,nz=1
 integer,parameter :: nxm=nx-1,nym=ny-1,nzm=nz 
 !integer,parameter :: nx=257,ny=129,nz=1
 !integer,parameter :: nxm=nx-1,nym=ny-1,nzm=nz 
