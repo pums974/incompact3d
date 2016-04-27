@@ -71,6 +71,11 @@ real(8)                     :: aaaa
       write(*,1001) itime,t
  1001 format('Time step =',i7,', Time unit =',F9.3)
       call time_measure (0)
+      if (itime==idebut+1) then
+        ntics=0
+        average_t=0.
+      endif
+
       do itr=1,iavance_temps
 !        
          call inflow    (ux,uy,uz)
