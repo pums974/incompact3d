@@ -3,3 +3,7 @@ Incompact.tar
 *.mod
 *__genmod.f90
 incompact3d
+*.jpg
+sill*
+*.dat
+restart
