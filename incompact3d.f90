@@ -60,7 +60,7 @@ real(8)                     :: aaaa
    call waves ()  
    call initial (ux,uy,uz,gx,gy,gz,fx,fy,fz,phi,ppm,temp,gtemp)
    
-   call init_SLFFT2D(nxm,nym)
+   call init_SLFFT2D(nxm,nym,mx,my)
    if (ivirtuel.eq.2) then !new method
        call gene_epsi(epsi,epsidec)
        call verif_epsi(epsi)
