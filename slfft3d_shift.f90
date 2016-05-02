@@ -1,5 +1,6 @@
 module slfft3d_shift_m
   use fft_m
+  use slfft3d_m
 implicit none
 contains
 !*****************************************************************************
@@ -50,8 +51,8 @@ if (((ncly.eq.2).or.(ncly.eq.1)).and.(nclx.eq.0).and.(nclz.eq.0)) then
       enddo
       enddo
 
-      call scfft3d(0,nxm,nym,nzm,1./nxm/nym/nzm,wk1,mx,my,wk1,mx/2,my,table,work,0)
-      call scfft3d(1,nxm,nym,nzm,1./nxm/nym/nzm,wk1,mx,my,wk1,mx/2,my,table,work,0)
+
+      call SLFFT3D(wk1,wk1,nxm,nym,nzm,mx,my,mx/2,my,work,table,-1,1./nxm/nym/nzm,mx,my,mz,nwork)
 
       do k=1,nzm
       do j=1,nym
@@ -345,7 +346,7 @@ if (((ncly.eq.2).or.(ncly.eq.1)).and.(nclx.eq.0).and.(nclz.eq.0)) then
       ps(:,:,:)=0. ; ps(:,:,:)=tr(:,:,:)
       ps(:,ny,nzm/2+1)=0.
    
-      call csfft3d(-1,nxm,nym,nzm,1.,ps,mx/2,my,ps,mx,my,table,work,0)
+      call SLFFT3D(ps,ps,nxm,nym,nzm,mx/2,my,mx,my,work,table,1,1.,mx,my,mz,nwork)
       
       do k=1,nzm
       do j=1,nym/2   
@@ -380,8 +381,7 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.(ncly.eq.0).and.(nclz.eq.0)) then
       enddo
       enddo
 
-      call scfft3d(0,nxm,nym,nzm,1./nxm/nym/nzm,wk1,mx,ny+2,wk1,nxm/2+1,ny+2,table,work,0)
-      call scfft3d(1,nxm,nym,nzm,1./nxm/nym/nzm,wk1,mx,ny+2,wk1,nxm/2+1,ny+2,table,work,0)!
+      call SLFFT3D(wk1,wk1,nxm,nym,nzm,mx,ny+2,nxm/2+1,ny+2,work,table,1,1./nxm/nym/nzm,mx,my,mz,nwork)
 
       do k=1,nzm
       do j=1,nym
@@ -689,8 +689,7 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.(ncly.eq.0).and.(nclz.eq.0)) then
       ps(nx,nym/2+1,1)=-ps(nx,nym/2+1,1)/2.
       ps(nx+1,nym/2+1,1)=0.
 
-      call csfft3d(-1,nxm,nym,nzm,1.,ps,nxm/2+1,my,ps,mx,my,table,work,0)!
-
+      call SLFFT3D(ps,ps,nxm,nym,nzm,nxm/2+1,my,mx,my,work,table,1,1.,mx,my,mz,nwork)
       do k=1,nzm
       do j=1,nym
       do i=1,nxm/2
@@ -741,8 +740,7 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.((nclz.eq.
       enddo
       enddo
 
-      call scfft3d(0,nxm,nym,nzm,1./nxm/nym/nzm,ps,mx,my,ps,mx/2,my,table,work,0)
-      call scfft3d(1,nxm,nym,nzm,1./nxm/nym/nzm,ps,mx,my,ps,mx/2,my,table,work,0)
+      call SLFFT3D(ps,ps,nxm,nym,nzm,mx,my,mx/2,my,work,table,-1,1./nxm/nym/nzm,mx,my,mz,nwork)
   
       do k=1,nzm
       do j=1,nym
@@ -942,7 +940,7 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.((nclz.eq.
         tr(nx,j,1)=ps(nx,j,1)
      enddo
 
-     call csfft3d(-1,nxm,nym,nzm,1.,tr,mx/2,my,tr,mx,my,table,work,0)
+     call SLFFT3D(tr,tr,nxm,nym,nzm,mx/2,my,mx,my,work,table,1,1.,mx,my,mz,nwork)
 
      wk1(:,:,:)=0. ; wk2(:,:,:)=0.
      do k=1,nz
@@ -1003,8 +1001,7 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.(nclz.eq.0
       enddo
       enddo
    
-      call scfft3d(0,nxm,nym,nzm,1./nxm/nym/nzm,ps,mx,my,ps,mx/2,my,table,work,0)
-      call scfft3d(1,nxm,nym,nzm,1./nxm/nym/nzm,ps,mx,my,ps,mx/2,my,table,work,0)
+      call SLFFT3D(ps,ps,nxm,nym,nzm,mx,my,mx/2,my,work,table,-1,1./nxm/nym/nzm,mx,my,mz,nwork)
 
 !***************************************************
 
@@ -1307,7 +1304,7 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.(nclz.eq.0
      enddo
      ps(2,1,nzm/2+1)=0.
 
-     call csfft3d(-1,nxm,nym,nzm,1.,ps,mx/2,my,ps,mx,my,table,work,0)
+     call SLFFT3D(ps,ps,nxm,nym,nzm,mx/2,my,mx,my,work,table,1,1.,mx,my,mz,nwork)
    
      do i=1,mxyz
         wk1(i,1,1)=0.
@@ -1348,8 +1345,7 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
       enddo
       enddo
       
-      call scfft3d(0,nxm,nym,nzm,1./nxm/nym/nzm,tr,mx,my,tr,mx/2,my,table,work,0)
-      call scfft3d(1,nxm,nym,nzm,1./nxm/nym/nzm,tr,mx,my,tr,mx/2,my,table,work,0)
+      call SLFFT3D(tr,tr,nxm,nym,nzm,mx,my,mx/2,my,work,table,-1,1./nxm/nym/nzm,mx,my,mz,nwork)
 
       do k=1,mz
       do j=1,nym
@@ -1615,7 +1611,7 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
       enddo
       enddo
       tr(:,:,nz+1)=0.
-      call csfft3d(-1,nxm,nym,nzm,1.,tr,mx/2,my,tr,mx,my,table,work,0)
+      call SLFFT3D(tr,tr,nxm,nym,nzm,mx/2,my,mx,my,work,table,1,1.,mx,my,mz,nwork)
       do k=1,nzm
       do j=1,nym
       do i=1,nxm
