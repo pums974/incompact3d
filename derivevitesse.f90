@@ -1851,35 +1851,47 @@ if ((nclx==1).or.(nclx==2)) then
    endif
 
    if (npaire==0) then
-      do j=1,nyz
-         tx(1,j,1)=acix6*(ux(2,j,1)-ux(1,j,1))&
-              +bcix6*(ux(3,j,1)-2.*ux(1,j,1)+ux(2,j,1)) 
-         tx(2,j,1)=acix6*(ux(3,j,1)-ux(2,j,1))&
-              +bcix6*(ux(4,j,1)-ux(1,j,1))
+      do k=1,nz
+      do j=1,ny
+         tx(1,j,k)=acix6*(ux(2,j,k)-ux(1,j,k))&
+              +bcix6*(ux(3,j,k)-2.*ux(1,j,k)+ux(2,j,k)) 
+         tx(2,j,k)=acix6*(ux(3,j,k)-ux(2,j,k))&
+              +bcix6*(ux(4,j,k)-ux(1,j,k))
       enddo
-      do j=1,nyz
+      enddo
+      do k=1,nz
+      do j=1,ny
       do i=3,nxm-2
-         tx(i,j,1)=acix6*(ux(i+1,j,1)-ux(i,j,1))&
-              +bcix6*(ux(i+2,j,1)-ux(i-1,j,1))
+         tx(i,j,k)=acix6*(ux(i+1,j,k)-ux(i,j,k))&
+              +bcix6*(ux(i+2,j,k)-ux(i-1,j,k))
       enddo
       enddo
-      do j=1,nyz
-         tx(nxm-1,j,1)=acix6*(ux(nxm,j,1)-ux(nxm-1,j,1))&
-              +bcix6*(ux(nx,j,1)-ux(nxm-2,j,1)) 
-         tx(nxm,j,1)=acix6*(ux(nx,j,1)-ux(nxm,j,1))&
-              +bcix6*(2.*ux(nx,j,1)-ux(nxm,j,1)-ux(nxm-1,j,1)) 
       enddo
-      do j=1,nyz
+      do k=1,nz
+      do j=1,ny
+         tx(nxm-1,j,k)=acix6*(ux(nxm,j,k)-ux(nxm-1,j,k))&
+              +bcix6*(ux(nx,j,k)-ux(nxm-2,j,k)) 
+         tx(nxm,j,k)=acix6*(ux(nx,j,k)-ux(nxm,j,k))&
+              +bcix6*(2.*ux(nx,j,k)-ux(nxm,j,k)-ux(nxm-1,j,k)) 
+      enddo
+      enddo
+      do k=1,nz
+      do j=1,ny
       do i=2,nxm
-         tx(i,j,1)=tx(i,j,1)-tx(i-1,j,1)*csx6(i)
+         tx(i,j,k)=tx(i,j,k)-tx(i-1,j,k)*csx6(i)
       enddo
       enddo
-      do j=1,nyz
-         tx(nxm,j,1)=tx(nxm,j,1)*cwx6(nxm)
       enddo
-      do j=1,nyz
+      do k=1,nz
+      do j=1,ny
+         tx(nxm,j,k)=tx(nxm,j,k)*cwx6(nxm)
+      enddo
+      enddo
+      do k=1,nz
+      do j=1,ny
       do i=nxm-1,1,-1
-         tx(i,j,1)=(tx(i,j,1)-cfx6(i)*tx(i+1,j,1))*cwx6(i)
+         tx(i,j,k)=(tx(i,j,k)-cfx6(i)*tx(i+1,j,k))*cwx6(i)
+      enddo
       enddo
       enddo
    endif
@@ -1985,43 +1997,55 @@ endif
 
 if ((nclx==1).or.(nclx==2)) then
    if (npaire==1) then
-      do j=1,nyz
-         tx(1,j,1)=aicix6*(ux(2,j,1)+ux(1,j,1))&
-              +bicix6*(ux(3,j,1)+ux(2,j,1))&
-              +cicix6*(ux(4,j,1)+ux(3,j,1))             
-         tx(2,j,1)=aicix6*(ux(3,j,1)+ux(2,j,1))&
-              +bicix6*(ux(4,j,1)+ux(1,j,1))&
-              +cicix6*(ux(5,j,1)+ux(2,j,1))               
+      do k=1,nz
+      do j=1,ny
+         tx(1,j,k)=aicix6*(ux(2,j,k)+ux(1,j,k))&
+              +bicix6*(ux(3,j,k)+ux(2,j,k))&
+              +cicix6*(ux(4,j,k)+ux(3,j,k))             
+         tx(2,j,k)=aicix6*(ux(3,j,4)+ux(2,j,k))&
+              +bicix6*(ux(4,j,k)+ux(1,j,k))&
+              +cicix6*(ux(5,j,k)+ux(2,j,k))               
       enddo
-      do j=1,nyz
+      enddo
+      do k=1,nz
+      do j=1,ny
       do i=3,nxm-3
-         tx(i,j,1)=aicix6*(ux(i+1,j,1)+ux(i,j,1))&
-              +bicix6*(ux(i+2,j,1)+ux(i-1,j,1))&
-              +cicix6*(ux(i+3,j,1)+ux(i-2,j,1))
+         tx(i,j,k)=aicix6*(ux(i+1,j,k)+ux(i,j,k))&
+              +bicix6*(ux(i+2,j,k)+ux(i-1,j,k))&
+              +cicix6*(ux(i+3,j,k)+ux(i-2,j,k))
       enddo
       enddo
-      do j=1,nyz
-         tx(nxm-2,j,1)=aicix6*(ux(nxm-1,j,1)+ux(nxm-2,j,1))&
-              +bicix6*(ux(nxm,j,1)+ux(nxm-3,j,1))&
-              +cicix6*(ux(nx,j,1)+ux(nxm-4,j,1))
-         tx(nxm-1,j,1)=aicix6*(ux(nxm,j,1)+ux(nxm-1,j,1))&
-              +bicix6*(ux(nx,j,1)+ux(nxm-2,j,1))&
-              +cicix6*(ux(nxm,j,1)+ux(nxm-3,j,1))
-         tx(nxm,j,1)=aicix6*(ux(nx,j,1)+ux(nxm,j,1))&
-              +bicix6*(ux(nxm,j,1)+ux(nxm-1,j,1))&
-              +cicix6*(ux(nxm-1,j,1)+ux(nxm-2,j,1))            
       enddo
-      do j=1,nyz
+      do k=1,nz
+      do j=1,ny
+         tx(nxm-2,j,k)=aicix6*(ux(nxm-1,j,k)+ux(nxm-2,j,k))&
+              +bicix6*(ux(nxm,j,k)+ux(nxm-3,j,k))&
+              +cicix6*(ux(nx,j,k)+ux(nxm-4,j,k))
+         tx(nxm-1,j,k)=aicix6*(ux(nxm,j,k)+ux(nxm-1,j,k))&
+              +bicix6*(ux(nx,j,k)+ux(nxm-2,j,k))&
+              +cicix6*(ux(nxm,j,k)+ux(nxm-3,j,k))
+         tx(nxm,j,k)=aicix6*(ux(nx,j,k)+ux(nxm,j,k))&
+              +bicix6*(ux(nxm,j,k)+ux(nxm-1,j,k))&
+              +cicix6*(ux(nxm-1,j,k)+ux(nxm-2,j,k))            
+      enddo
+      enddo
+      do k=1,nz
+      do j=1,ny
       do i=2,nxm
-         tx(i,j,1)=tx(i,j,1)-tx(i-1,j,1)*cisx6(i)
+         tx(i,j,k)=tx(i,j,k)-tx(i-1,j,k)*cisx6(i)
       enddo
       enddo
-      do j=1,nyz
-         tx(nxm,j,1)=tx(nxm,j,1)*ciwx6(nxm)
       enddo
-      do j=1,nyz
+      do k=1,nz
+      do j=1,ny
+         tx(nxm,j,k)=tx(nxm,j,k)*ciwx6(nxm)
+      enddo
+      enddo
+      do k=1,nz
+      do j=1,ny
       do i=nxm-1,1,-1
-         tx(i,j,1)=(tx(i,j,1)-cifx6(i)*tx(i+1,j,1))*ciwx6(i)
+         tx(i,j,k)=(tx(i,j,k)-cifx6(i)*tx(i+1,j,k))*ciwx6(i)
+      enddo
       enddo
       enddo
    endif
@@ -3098,11 +3122,11 @@ USE derivZ
 implicit none
 
 integer :: nx,ny,nz,nzm,npaire
-real(8),dimension(nx,ny,nzm) :: tz
+real(8),dimension(nx,ny,nz) :: tz
 real(8),dimension(nx,ny,nz) :: uz
 real(8),dimension(nx,ny,nz) :: rz
 real(8),dimension(nx,ny) :: sz
-real(8),dimension(nzm) :: cfz6,csz6,cwz6
+real(8),dimension(nz) :: cfz6,csz6,cwz6
 integer :: i,j,k
 
 if (nclz==0) then
@@ -3279,10 +3303,10 @@ USE derivZ
 implicit none
 
 integer :: nx,ny,nz,nzm,npaire
-real(8),dimension(nx,ny,nzm) :: tz
+real(8),dimension(nx,ny,nz) :: tz
 real(8),dimension(nx,ny,nz) :: uz,rz
 real(8),dimension(nx,ny) :: sz
-real(8),dimension(nzm) :: cifz6,cisz6,ciwz6
+real(8),dimension(nz) :: cifz6,cisz6,ciwz6
 integer :: i,j,k
 
 if (nclz==0) then
@@ -3432,7 +3456,7 @@ implicit none
 
 integer :: nx,nzm,ny,nz,npaire
 real(8),dimension(nx,ny,nz) :: tz
-real(8),dimension(nx,ny,nzm) :: uz,rz
+real(8),dimension(nx,ny,nz) :: uz,rz
 real(8),dimension(nx,ny) :: sz
 real(8),dimension(nz) :: cfiz6,csiz6,cwiz6
 real(8),dimension(nz) :: cfz6,csz6,cwz6
@@ -3567,7 +3591,7 @@ implicit none
 
 integer :: nx,ny,nz,nzm,npaire
 real(8),dimension(nx,ny,nz) :: tz
-real(8),dimension(nx,ny,nzm) :: uz
+real(8),dimension(nx,ny,nz) :: uz
 real(8),dimension(nx,ny,nz) :: rz
 real(8),dimension(nx,ny) :: sz
 real(8),dimension(nz) :: cifiz6,cisiz6,ciwiz6
