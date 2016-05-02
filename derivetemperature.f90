@@ -29,9 +29,9 @@ if (ncltx==0) then
       rx(2,j,k)=0. 
    enddo
    enddo
-   do i=3,nx-2 
    do k=1,nz 
    do j=1,ny 
+   do i=3,nx-2 
       tx(i,j,k)=afix*(ux(i+1,j,k)-ux(i-1,j,k))&
            +bfix*(ux(i+2,j,k)-ux(i-2,j,k)) 
       rx(i,j,k)=0. 
@@ -48,9 +48,9 @@ if (ncltx==0) then
       rx(nx,j,k)=alfaix           
    enddo
    enddo 
-   do i=2, nx 
    do k=1, nz 
    do j=1, ny 
+   do i=2, nx 
       tx(i,j,k)=tx(i,j,k)-tx(i-1,j,k)*fsx(i) 
       rx(i,j,k)=rx(i,j,k)-rx(i-1,j,k)*fsx(i) 
    enddo
@@ -62,9 +62,9 @@ if (ncltx==0) then
       rx(nx,j,k)=rx(nx,j,k)*fwx(nx) 
    enddo
    enddo 
-   do i=nx-1,1,-1 
    do k=1,nz 
    do j=1,ny 
+   do i=nx-1,1,-1 
       tx(i,j,k)=(tx(i,j,k)-ffx(i)*tx(i+1,j,k))*fwx(i) 
       rx(i,j,k)=(rx(i,j,k)-ffx(i)*rx(i+1,j,k))*fwx(i) 
    enddo
@@ -94,9 +94,9 @@ if (ncltx==1) then
               +bfix*(ux(4,j,k)-ux(2,j,k)) 
       enddo
       enddo
-      do i=3,nx-2 
       do k=1,nz 
       do j=1,ny 
+      do i=3,nx-2 
          tx(i,j,k)=afix*(ux(i+1,j,k)-ux(i-1,j,k))&
               +bfix*(ux(i+2,j,k)-ux(i-2,j,k)) 
       enddo
@@ -109,9 +109,9 @@ if (ncltx==1) then
          tx(nx,j,k)=0. 
       enddo
       enddo 
-      do i=2,nx 
       do k=1,nz 
       do j=1,ny 
+      do i=2,nx 
          tx(i,j,k)=tx(i,j,k)-tx(i-1,j,k)*fsx(i) 
       enddo
       enddo
@@ -121,9 +121,9 @@ if (ncltx==1) then
          tx(nx,j,k)=tx(nx,j,k)*fwx(nx) 
       enddo
       enddo
-      do i=nx-1,1,-1 
       do k=1,nz 
       do j=1,ny 
+      do i=nx-1,1,-1 
          tx(i,j,k)=(tx(i,j,k)-ffx(i)*tx(i+1,j,k))*fwx(i) 
       enddo
       enddo
@@ -138,9 +138,9 @@ if (ncltx==1) then
               +bfix*(ux(4,j,k)+ux(2,j,k)) 
       enddo
       enddo
-      do i=3,nx-2 
       do k=1,nz 
       do j=1,ny 
+      do i=3,nx-2 
          tx(i,j,k)=afix*(ux(i+1,j,k)-ux(i-1,j,k))&
               +bfix*(ux(i+2,j,k)-ux(i-2,j,k)) 
       enddo
@@ -154,9 +154,9 @@ if (ncltx==1) then
               +bfix*((-ux(nx-2,j,k))-ux(nx-2,j,k)) 
       enddo
       enddo
-      do i=2,nx 
       do k=1,nz 
       do j=1,ny 
+      do i=2,nx 
          tx(i,j,k)=tx(i,j,k)-tx(i-1,j,k)*fsx(i) 
       enddo
       enddo
@@ -166,9 +166,9 @@ if (ncltx==1) then
          tx(nx,j,k)=tx(nx,j,k)*fwx(nx) 
       enddo
       enddo
-      do i=nx-1,1,-1 
       do k=1,nz 
       do j=1,ny 
+      do i=nx-1,1,-1 
          tx(i,j,k)=(tx(i,j,k)-ffx(i)*tx(i+1,j,k))*fwx(i) 
       enddo
       enddo
@@ -183,9 +183,9 @@ if (ncltx==2) then
       tx(2,j,k)=af2x*(ux(3,j,k)-ux(1,j,k)) 
    enddo
    enddo 
-   do i=3,nx-2 
    do k=1,nz 
    do j=1,ny 
+   do i=3,nx-2 
       tx(i,j,k)=afix*(ux(i+1,j,k)-ux(i-1,j,k))&
            +bfix*(ux(i+2,j,k)-ux(i-2,j,k)) 
    enddo
@@ -197,9 +197,9 @@ if (ncltx==2) then
       tx(nx,j,k)=(-afnx*ux(nx,j,k))-bfnx*ux(nx-1,j,k)-cfnx*ux(nx-2,j,k) 
    enddo
    enddo
-   do i=2,nx 
    do k=1,nz 
    do j=1,ny 
+   do i=2,nx 
       tx(i,j,k)=tx(i,j,k)-tx(i-1,j,k)*fsx(i) 
    enddo
    enddo
@@ -209,9 +209,9 @@ if (ncltx==2) then
       tx(nx,j,k)=tx(nx,j,k)*fwx(nx) 
    enddo
    enddo
-   do i=nx-1,1,-1 
    do k=1,nz 
    do j=1,ny 
+   do i=nx-1,1,-1 
       tx(i,j,k)=(tx(i,j,k)-ffx(i)*tx(i+1,j,k))*fwx(i) 
    enddo
    enddo 
@@ -364,9 +364,9 @@ if (nclty==1) then
               +bfjy*(uy(i,k,4)-uy(i,k,2)) 
       enddo
       enddo 
+      do j=3,ny-2 
       do k=1,nz 
       do i=1,nx 
-      do j=3,ny-2 
          ty(i,k,j)=afjy*(uy(i,k,j+1)-uy(i,k,j-1))&
               +bfjy*(uy(i,k,j+2)-uy(i,k,j-2)) 
       enddo
@@ -408,9 +408,9 @@ if (nclty==1) then
               +bfjy*(uy(i,k,4)+uy(i,k,2)) 
       enddo
       enddo 
+      do j=3,ny-2 
       do k=1,nz 
       do i=1,nx 
-      do j=3,ny-2 
          ty(i,k,j)=afjy*(uy(i,k,j+1)-uy(i,k,j-1))&
               +bfjy*(uy(i,k,j+2)-uy(i,k,j-2)) 
       enddo
@@ -756,9 +756,9 @@ real(8), dimension(nx):: sfx,ssx,swx
          rx(3,j,k)=0.
       enddo
       enddo
-      do i=4,nx-3
       do k=1,nz
       do j=1,ny
+      do i=4,nx-3
          tx(i,j,k)=asix*(ux(i+1,j,k)-ux(i  ,j,k)&
                         -ux(i  ,j,k)+ux(i-1,j,k))&
                   +bsix*(ux(i+2,j,k)-ux(i  ,j,k)&
@@ -794,9 +794,9 @@ real(8), dimension(nx):: sfx,ssx,swx
          rx(nx  ,j,k)=alsaix
       enddo
       enddo
-      do i=2,nx
       do k=1,nz
       do j=1,ny
+      do i=2,nx
          tx(i,j,k)=tx(i,j,k)-tx(i-1,j,k)*ssx(i)
          rx(i,j,k)=rx(i,j,k)-rx(i-1,j,k)*ssx(i)
       enddo
@@ -808,9 +808,9 @@ real(8), dimension(nx):: sfx,ssx,swx
          rx(nx,j,k)=rx(nx,j,k)*swx(nx)
       enddo
       enddo
-      do i=nx-1,1,-1
       do k=1,nz
       do j=1,ny
+      do i=nx-1,1,-1
          tx(i,j,k)=(tx(i,j,k)-sfx(i)*tx(i+1,j,k))*swx(i)
          rx(i,j,k)=(rx(i,j,k)-sfx(i)*rx(i+1,j,k))*swx(i)
       enddo
@@ -855,9 +855,9 @@ real(8), dimension(nx):: sfx,ssx,swx
                            -ux(3,j,k)+ux(2,j,k))
          enddo
          enddo
-         do i=4,nx-3
          do k=1,nz
          do j=1,ny
+         do i=4,nx-3
             tx(i,j,k)=asix*(ux(i+1,j,k)-ux(i  ,j,k)&
                            -ux(i  ,j,k)+ux(i-1,j,k))&
                      +bsix*(ux(i+2,j,k)-ux(i  ,j,k)&
@@ -889,9 +889,9 @@ real(8), dimension(nx):: sfx,ssx,swx
                               -ux(nx  ,j,k)+ux(nx-3,j,k))
          enddo
          enddo
-         do i=2,nx
          do k=1,nz
          do j=1,ny
+         do i=2,nx
             tx(i,j,k)=tx(i,j,k)-tx(i-1,j,k)*ssx(i)
          enddo
          enddo
@@ -901,9 +901,9 @@ real(8), dimension(nx):: sfx,ssx,swx
             tx(nx,j,k)=tx(nx,j,k)*swx(nx)
          enddo
          enddo
-         do i=nx-1,1,-1
          do k=1,nz
          do j=1,ny
+         do i=nx-1,1,-1
             tx(i,j,k)=(tx(i,j,k)-sfx(i)*tx(i+1,j,k))*swx(i)
          enddo
          enddo
@@ -927,9 +927,9 @@ real(8), dimension(nx):: sfx,ssx,swx
                            -ux(3,j,k)-ux(2,j,k))
          enddo
          enddo
-         do i=4,nx-3
          do k=1,nz
          do j=1,ny
+         do i=4,nx-3
             tx(i,j,k)=asix*(ux(i+1,j,k)-ux(i  ,j,k)&
                            -ux(i  ,j,k)+ux(i-1,j,k))&
                      +bsix*(ux(i+2,j,k)-ux(i  ,j,k)&
@@ -956,9 +956,9 @@ real(8), dimension(nx):: sfx,ssx,swx
             tx(nx  ,j,k)=0.
          enddo
          enddo
-         do i=2,nx
          do k=1,nz
          do j=1,ny
+         do i=2,nx
             tx(i,j,k)=tx(i,j,k)-tx(i-1,j,k)*ssx(i)
          enddo
          enddo
@@ -968,9 +968,9 @@ real(8), dimension(nx):: sfx,ssx,swx
             tx(nx,j,k)=tx(nx,j,k)*swx(nx)
          enddo
          enddo
-         do i=nx-1,1,-1
          do k=1,nz
          do j=1,ny
+         do i=nx-1,1,-1
             tx(i,j,k)=(tx(i,j,k)-sfx(i)*tx(i+1,j,k))*swx(i)
          enddo
          enddo
@@ -992,9 +992,9 @@ real(8), dimension(nx):: sfx,ssx,swx
       enddo
       enddo
 !
-      do i=4,nx-3
       do k=1,nz
       do j=1,ny
+      do i=4,nx-3
          tx(i,j,k)=asix*(ux(i+1,j,k)-ux(i  ,j,k)&
                         -ux(i  ,j,k)+ux(i-1,j,k))&
                   +bsix*(ux(i+2,j,k)-ux(i  ,j,k)&
@@ -1021,9 +1021,9 @@ real(8), dimension(nx):: sfx,ssx,swx
                      +csnx*ux(nx-2,j,k)+dsnx*ux(nx-3,j,k)
       enddo
       enddo
-      do i=2,nx
       do k=1,nz
       do j=1,ny
+      do i=2,nx
          tx(i,j,k)=tx(i,j,k)-tx(i-1,j,k)*ssx(i)
       enddo
       enddo
@@ -1033,9 +1033,9 @@ real(8), dimension(nx):: sfx,ssx,swx
          tx(nx,j,k)=tx(nx,j,k)*swx(nx)
       enddo
       enddo
-      do i=nx-1,1,-1
       do k=1,nz
       do j=1,ny
+      do i=nx-1,1,-1
          tx(i,j,k)=(tx(i,j,k)-sfx(i)*tx(i+1,j,k))*swx(i)
       enddo
       enddo
@@ -1226,9 +1226,9 @@ real(8),dimension(ny) :: sfy,ssy,swy
                            -uy(i,k,3)+uy(i,k,2))
          enddo
          enddo
+         do j=4,ny-3
          do k=1,nz
          do i=1,nx
-         do j=4,ny-3
             ty(i,k,j)=asjy*(uy(i,k,j+1)-uy(i,k,j  )&
                            -uy(i,k,j  )+uy(i,k,j-1))&
                      +bsjy*(uy(i,k,j+2)-uy(i,k,j  )&
@@ -1298,9 +1298,9 @@ real(8),dimension(ny) :: sfy,ssy,swy
                            -uy(i,k,3)-uy(i,k,2))
          enddo
          enddo
+         do j=4,ny-3
          do k=1,nz
          do i=1,nx
-         do j=4,ny-3
             ty(i,k,j)=asjy*(uy(i,k,j+1)-uy(i,k,j  )&
                            -uy(i,k,j  )+uy(i,k,j-1))&
                      +bsjy*(uy(i,k,j+2)-uy(i,k,j  )&
@@ -1362,9 +1362,9 @@ real(8),dimension(ny) :: sfy,ssy,swy
                         -uy(i,k,3)+uy(i,k,1))
       enddo
       enddo
+      do j=4,ny-3
       do k=1,nz
       do i=1,nx
-      do j=4,ny-3
          ty(i,k,j)=asjy*(uy(i,k,j+1)-uy(i,k,j  )&
                         -uy(i,k,j  )+uy(i,k,j-1))&
                   +bsjy*(uy(i,k,j+2)-uy(i,k,j  )&

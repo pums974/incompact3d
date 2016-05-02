@@ -894,16 +894,4 @@ enddo
 return
 end subroutine lubksb
 
-
-
-
-
-
-
-
-
-
-
-
-
 end module body_m
