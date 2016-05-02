@@ -10,7 +10,7 @@ implicit none
   
   public SLFFT2D, init_SLFFT2D,end_SLFFT2D
 
-  logical,parameter :: fftw=.true.
+  logical,parameter :: fftw=.false.
 contains
 !*****************************************************************************************
 !

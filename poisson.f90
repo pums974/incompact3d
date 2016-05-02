@@ -181,7 +181,7 @@ USE variables
 implicit none
 
 integer :: i,j
-real(8),dimension(nxm,nym,nz) :: ppm
+real(8),dimension(nxm,nym,nzm) :: ppm
 real(8),dimension(nwork) :: work
 real(8),dimension(100+2*(nxm+nym+nzm)) :: table ! TODO
 real(8),dimension(mx,my) :: tb1,tb2,tb3,tb4,tb5,tb6 

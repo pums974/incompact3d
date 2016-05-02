@@ -126,8 +126,8 @@ real(8)                     :: aaaa
             open(20,file='temp.dat',form='formatted')
             do j=1,ny
                do i=1,nx
-                  write(10,*)(i-1)*dx,yp(j),ux(i,j,1)
-                  write(20,*) dx*(i-1),yp(j),temp(i,j,1) !,uy(i,j,1)
+                  write(10,*)(i-1)*dx,yp(j),ux(i,j,nz/2)
+                  write(20,*) dx*(i-1),yp(j),temp(i,j,nz/2) !,uy(i,j,1)
                enddo
                write(10,*)
                write(20,*)

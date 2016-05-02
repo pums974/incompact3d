@@ -161,9 +161,22 @@ endif
   tmax=umax
   xnb=0.
 if (nz.gt.1) then
-  do ijk=1,nxyz1
-     umoy=umoy+sqrt(ux(ijk,1,1)*ux(ijk,1,1)+uy(ijk,1,1)*uy(ijk,1,1)+uz(ijk,1,1)*uz(ijk,1,1))
-     tmoy=tmoy+sqrt(temp(ijk,1,1)*temp(ijk,1,1))
+   do k=1,nz
+   do j=1,ny 
+   do i=1,nx
+      xm=(i-1)*dx
+      ym=yp(j)
+    if(sqrt((xm-cex)*(xm-cex)+(ym-cey)*(ym-cey)).gt.ra)then
+        normu=sqrt(ux(i,j,k)*ux(i,j,k)+uy(i,j,k)*uy(i,j,k)+uz(i,j,k)*uz(i,j,k))
+        umoy=umoy+normu
+        normt= sqrt(temp(i,j,k)*temp(i,j,k))
+        tmoy=tmoy+normt          
+        xnb=xnb+1.
+        if (umax.lt.normu) umax=normu
+        if (tmax.lt.normt) tmax=normt
+    endif
+   enddo
+   enddo
   enddo
 else
    do j=1,ny

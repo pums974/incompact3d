@@ -847,8 +847,36 @@ endif
 
 if (iecoule.eq.7) then
    if (nz.gt.1) then 
-      print *,'ECOULEMENT UNIQUEMENT 2D'
-      stop
+   do j=1,ny
+   do i=1,nx
+      ux(i,j,1)=0.
+      uy(i,j,1)=0.
+      uz(i,j,1)=0.
+      ux(i,j,nz)=0.
+      uy(i,j,nz)=0.             
+      uz(i,j,nz)=0.             
+   enddo
+   enddo
+   do k=1,nz
+   do j=1,ny
+      ux(1,j,k)=0.
+      uy(1,j,k)=0.
+      uz(1,j,k)=0.
+      ux(nx,j,k)=0.
+      uy(nx,j,k)=0.             
+      uz(nx,j,k)=0.             
+   enddo
+   enddo
+   do k=1,nz
+   do i=1,nx
+      ux(i,1,k)=0.
+      uy(i,1,k)=0.
+      uz(i,1,k)=0.
+      ux(i,ny,k)=0.
+      uy(i,ny,k)=0.             
+      uz(i,ny,k)=0.             
+   enddo
+   enddo
    else
 !      do k=1,nz
 !      do j=1,ny
