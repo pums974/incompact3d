@@ -162,7 +162,7 @@ print*,"Preparing FFTW ..."
      fftw_plan_x1 = fftw_plan_many_dft_r2c(1, [nx], ny,   &
                                   x, [nx],                &
                                   1, mx,                  &
-                                  fftw_cmp, [nx],         &
+                                  fftw_cmp, [nx],         & ! TODO nx -> mx/2 ?
                                   1, nx,                  &
                                   FFTW_FLAG)
 

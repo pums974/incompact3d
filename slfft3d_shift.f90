@@ -75,10 +75,10 @@ if (((ncly.eq.2).or.(ncly.eq.1)).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do k=1,nz     
       do j=1,ny
       do i=1,nxm/2+1
-         xa=cos((j-1)/2.*pi/(nym))
-         xb=sin((j-1)/2.*pi/(nym))
-         xx1=tr(i,j,k)*xa/2.+us(i,j,k)*xb/2.
-         xx2=tr(i,nym-j+2,k)*xa/2.-us(i,nym-j+2,k)*xb/2.           
+         xa=cos((j-1)*0.5*pi/(nym))
+         xb=sin((j-1)*0.5*pi/(nym))
+         xx1=tr(i,j,k)*xa*0.5+us(i,j,k)*xb*0.5
+         xx2=tr(i,nym-j+2,k)*xa*0.5-us(i,nym-j+2,k)*xb*0.5           
          wk1(i,j,k)=xx1+xx2      
       enddo
       do i=2,nxm/2
@@ -88,20 +88,20 @@ if (((ncly.eq.2).or.(ncly.eq.1)).and.(nclx.eq.0).and.(nclz.eq.0)) then
       enddo
       do k=1,nz
       do j=1,ny
-         xa=cos((j-1)/2.*pi/(nym))
-         xb=sin((j-1)/2.*pi/(nym))
-         xx1=tr(nxm/2+1,j,k)*xa/2.+tr(nxm/2+1,nym-j+2,k)*xa/2.
-         xx2=-tr(nxm/2+2,j,k)*xb/2.+tr(nxm/2+2,nym-j+2,k)*xb/2.           
+         xa=cos((j-1)*0.5*pi/(nym))
+         xb=sin((j-1)*0.5*pi/(nym))
+         xx1=tr(nxm/2+1,j,k)*xa*0.5+tr(nxm/2+1,nym-j+2,k)*xa*0.5
+         xx2=-tr(nxm/2+2,j,k)*xb*0.5+tr(nxm/2+2,nym-j+2,k)*xb*0.5           
          wk1(nxm/2+1,j,k)=xx1+xx2 
       enddo
       enddo
       do k=1,nz
       do j=1,ny
       do i=1,nxm/2+1
-         xa=cos((j-1)/2.*pi/(nym))
-         xb=sin((j-1)/2.*pi/(nym))
-         xx1=-tr(i,j,k)*xb/2.+us(i,j,k)*xa/2.
-         xx2=tr(i,nym-j+2,k)*xb/2.+us(i,nym-j+2,k)*xa/2.           
+         xa=cos((j-1)*0.5*pi/(nym))
+         xb=sin((j-1)*0.5*pi/(nym))
+         xx1=-tr(i,j,k)*xb*0.5+us(i,j,k)*xa*0.5
+         xx2=tr(i,nym-j+2,k)*xb*0.5+us(i,nym-j+2,k)*xa*0.5           
          wk2(i,j,k)=xx1+xx2 
       enddo
       do i=2,nxm/2
@@ -111,18 +111,18 @@ if (((ncly.eq.2).or.(ncly.eq.1)).and.(nclx.eq.0).and.(nclz.eq.0)) then
       enddo
       do k=1,nz
       do j=2,ny
-         xa=cos((j-1)/2.*pi/(nym))
-         xb=sin((j-1)/2.*pi/(nym))
-         xx1=tr(nxm/2+1,j,k)*xa/2.-tr(nxm/2+1,nym-j+2,k)*xa/2.
-         xx2=-tr(nxm/2+2,j,k)*xb/2.-tr(nxm/2+2,nym-j+2,k)*xb/2.
+         xa=cos((j-1)*0.5*pi/(nym))
+         xb=sin((j-1)*0.5*pi/(nym))
+         xx1=tr(nxm/2+1,j,k)*xa*0.5-tr(nxm/2+1,nym-j+2,k)*xa*0.5
+         xx2=-tr(nxm/2+2,j,k)*xb*0.5-tr(nxm/2+2,nym-j+2,k)*xb*0.5
          wk2(nxm/2+1,nym-j+2,k)=xx1+xx2 
       enddo
       enddo
       do k=1,nz
-         xb=cos((j-1)/2.*pi/(nym))
-         xa=sin((j-1)/2.*pi/(nym))
-         xx1=-tr(nxm/2+2,1,k)*xa/2.-tr(nxm/2+1,nym-1+2,k)*xa/2.
-         xx2=tr(nxm/2+1,nym-1+2,k)*xb/2.+tr(nxm/2+2,1,k)*xb/2.           
+         xb=cos((j-1)*0.5*pi/(nym))
+         xa=sin((j-1)*0.5*pi/(nym))
+         xx1=-tr(nxm/2+2,1,k)*xa*0.5-tr(nxm/2+1,nym-1+2,k)*xa*0.5
+         xx2=tr(nxm/2+1,nym-1+2,k)*xb*0.5+tr(nxm/2+2,1,k)*xb*0.5           
          wk2(nxm/2+1,1,k)=xx1+xx2 
       enddo
       do k=1,mz
@@ -145,10 +145,10 @@ if (((ncly.eq.2).or.(ncly.eq.1)).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do i=1,nxm/2
          xb=sin((i-1)*pi/(nxm))
          xa=cos((i-1)*pi/(nxm))
-         xx1=(wk1(i,j,k)+wk1(nxm-i+2,j,k))*xa/2
-         xx2=(wk2(i,j,k)-wk2(nxm-i+2,j,k))*xb/2.
-         xx3=(wk1(i,j,k)+wk1(nxm-i+2,j,k))*xb/2
-         xx4=(-wk2(i,j,k)+wk2(nxm-i+2,j,k))*xa/2.
+         xx1=(wk1(i,j,k)+wk1(nxm-i+2,j,k))*xa*0.5
+         xx2=(wk2(i,j,k)-wk2(nxm-i+2,j,k))*xb*0.5
+         xx3=(wk1(i,j,k)+wk1(nxm-i+2,j,k))*xb*0.5
+         xx4=(-wk2(i,j,k)+wk2(nxm-i+2,j,k))*xa*0.5
          ps(2*i-1,j,k)=xx1+xx2
          ps(2*i,j,k)=-(xx3+xx4)
       enddo
@@ -186,10 +186,10 @@ if (((ncly.eq.2).or.(ncly.eq.1)).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do i=1,nx+1,2
          xa=cos((k-1)*pi/(nzm))
          xb=sin((k-1)*pi/(nzm))
-         xx1=ps(i,j,k)*xa/2.+ps(i+1,j,k)*xb/2.
-         xx2=ps(i,j,nzm-k+2)*xa/2.-ps(i+1,j,nzm-k+2)*xb/2.
-         xx3=ps(i,j,k)*xb/2.-ps(i+1,j,k)*xa/2.
-         xx4=ps(i,j,nzm-k+2)*xb/2.+ps(i+1,j,nzm-k+2)*xa/2. 
+         xx1=ps(i,j,k)*xa*0.5+ps(i+1,j,k)*xb*0.5
+         xx2=ps(i,j,nzm-k+2)*xa*0.5-ps(i+1,j,nzm-k+2)*xb*0.5
+         xx3=ps(i,j,k)*xb*0.5-ps(i+1,j,k)*xa*0.5
+         xx4=ps(i,j,nzm-k+2)*xb*0.5+ps(i+1,j,nzm-k+2)*xa*0.5 
          tab1(i,j,2*k-1)=xx1+xx2
          tab1(i,j,2*k)=-(xx3+xx4)
          tab1(i+1,j,2*k-1)=xx4-xx3
@@ -227,9 +227,9 @@ if (((ncly.eq.2).or.(ncly.eq.1)).and.(nclx.eq.0).and.(nclz.eq.0)) then
    if (isign==-1) then
       wk1(:,:,:)=0. ; wk1(:,:,:)=tab1(:,:,:)
       wk1(mx,1,1)=2.*wk1(mx,1,1)
-      wk1(mx,:,1)=wk1(mx,:,1)/2.
-      wk1(nxm/2+1,:,mz)=wk1(nxm/2+1,:,mz)/2.
-      wk1(nxm/2+2,:,mz)=wk1(nxm/2+2,:,mz)/2.      
+      wk1(mx,:,1)=wk1(mx,:,1)*0.5
+      wk1(nxm/2+1,:,mz)=wk1(nxm/2+1,:,mz)*0.5
+      wk1(nxm/2+2,:,mz)=wk1(nxm/2+2,:,mz)*0.5      
       wk1(nxm/2+1,1,mz)=wk1(nxm/2+1,1,mz)*2.
       do k=1,nz+1,2
       do j=1,my
@@ -237,8 +237,8 @@ if (((ncly.eq.2).or.(ncly.eq.1)).and.(nclx.eq.0).and.(nclz.eq.0)) then
          wk1(nxm+1,j,k)=wk1(mx,j,k)
       enddo
       enddo
-      wk1(nxm/2+1,1,mz)=wk1(nxm/2+1,1,mz)/2.
-      wk1(nxm/2+2,1,mz)=wk1(nxm/2+2,1,mz)/2.
+      wk1(nxm/2+1,1,mz)=wk1(nxm/2+1,1,mz)*0.5
+      wk1(nxm/2+2,1,mz)=wk1(nxm/2+2,1,mz)*0.5
       do i=1,mxyz
          tr(i,1,1)=0.
          us(i,1,1)=0.
@@ -265,8 +265,8 @@ if (((ncly.eq.2).or.(ncly.eq.1)).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do k=1,mz
       do j=1,ny+1
       do i=1,mx-1,2
-         xb=sin((i-1)/2.*pi/(nxm))
-         xa=cos((i-1)/2.*pi/(nxm))
+         xb=sin((i-1)*0.5*pi/(nxm))
+         xa=cos((i-1)*0.5*pi/(nxm))
          wk1((i+1)/2,j,k)=tr(i+1,j,k)*xb+us(nxm-i+1,j,k)*xb
          wk2((i+1)/2,j,k)=-tr(i+1,j,k)*xa-us(nxm-i+1,j,k)*xa
          ps((i+1)/2,j,k)=tr(i,j,k)*xa+us(nxm-i+2,j,k)*xa
@@ -298,10 +298,10 @@ if (((ncly.eq.2).or.(ncly.eq.1)).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do k=1,mz
       do j=1,ny+1
       do i=1,nxm/2+1
-         xa=cos((j-1)/2.*pi/(nym))
-         xb=sin((j-1)/2.*pi/(nym))
-         xa1=cos((nym-j+1)/2.*pi/(nym))
-         xb1=sin((nym-j+1)/2.*pi/(nym))
+         xa=cos((j-1)*0.5*pi/(nym))
+         xb=sin((j-1)*0.5*pi/(nym))
+         xa1=cos((nym-j+1)*0.5*pi/(nym))
+         xb1=sin((nym-j+1)*0.5*pi/(nym))
          xx1=(ps(i,j,k)+wk1(i,j,k))*xa-(tab1(i,j,k)+wk2(i,j,k))*xa1
          xx2=(ps(i,nym-j+2,k)+wk1(i,nym-j+2,k))*xb+(tab1(i,nym-j+2,k)+wk2(i,nym-j+2,k))*xa 
          xx3=-(ps(i,nym-j+2,k)+wk1(i,nym-j+2,k))*xb1+(tab1(i,nym-j+2,k)+wk2(i,nym-j+2,k))*xb
@@ -316,8 +316,8 @@ if (((ncly.eq.2).or.(ncly.eq.1)).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do i=1,mx
         tr(i,ny,k)=0.
       enddo
-      tr(nxm/2+1,j,k)=tr(nxm/2+1,j,k)/2.
-      tr(nxm/2+2,j,k)=tr(nxm/2+2,j,k)/2.
+      tr(nxm/2+1,j,k)=tr(nxm/2+1,j,k)*0.5
+      tr(nxm/2+2,j,k)=tr(nxm/2+2,j,k)*0.5
       tr(mx,1,k)=0.
       enddo
       enddo
@@ -329,8 +329,8 @@ if (((ncly.eq.2).or.(ncly.eq.1)).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do k=1,nz+1,2
       do j=1,ny
       do i=1,nx+1,2
-         xa=cos((k-1)/2.*pi/(nzm))
-         xb=sin((k-1)/2.*pi/(nzm))
+         xa=cos((k-1)*0.5*pi/(nzm))
+         xb=sin((k-1)*0.5*pi/(nzm))
          xx1=(ps(i,j,k)*xa+ps(i+1,j,k)*xb)+(-ps(i,j,k+1)*xb+ps(i+1,j,k+1)*xa)
          xx2=(-ps(i,j,k)*xb+ps(i+1,j,k)*xa)-(ps(i,j,k+1)*xa+ps(i+1,j,k+1)*xb) 
          xx3=(ps(i,j,k)*xa-ps(i+1,j,k)*xb)-(ps(i,j,k+1)*xb+ps(i+1,j,k+1)*xa) 
@@ -422,10 +422,10 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.(ncly.eq.0).and.(nclz.eq.0)) then
       do i=1,nxm/2+1
          xa=cos((j-1)*pi/(nym))
          xb=sin((j-1)*pi/(nym))
-         xx1=tr(i,j,k)*xa/2.+us(i,j,k)*xb/2.
-         xx2=tr(i,nym-j+2,k)*xa/2.-us(i,nym-j+2,k)*xb/2.      
-         xx3=tr(i,j,k)*xb/2-us(i,j,k)*xa/2.
-         xx4=tr(i,nym-j+2,k)*xb/2.+us(i,nym-j+2,k)*xa/2.
+         xx1=tr(i,j,k)*xa*0.5+us(i,j,k)*xb*0.5
+         xx2=tr(i,nym-j+2,k)*xa*0.5-us(i,nym-j+2,k)*xb*0.5      
+         xx3=tr(i,j,k)*xb*0.5-us(i,j,k)*xa*0.5
+         xx4=tr(i,nym-j+2,k)*xb*0.5+us(i,nym-j+2,k)*xa*0.5
          wk1(i,2*j-1,k)=xx1+xx2      
          wk1(i,2*j,k)=-(xx3+xx4)
       enddo
@@ -434,10 +434,10 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.(ncly.eq.0).and.(nclz.eq.0)) then
          xb=sin((j-1)*pi/(nym))
          xa1=cos((nym-j+1)*pi/(nym))
          xb1=sin((nym-j+1)*pi/(nym))
-         xx1=-tr(i,j,k)*xb/2.+us(i,j,k)*xa/2.
-         xx2=tr(i,nym-j+2,k)*xb/2.+us(i,nym-j+2,k)*xa/2.           
-         xx3=tr(i,j,k)*xa/2+us(i,j,k)*xb/2.
-         xx4=-tr(i,nym-j+2,k)*xa/2.+us(i,nym-j+2,k)*xb/2.
+         xx1=-tr(i,j,k)*xb*0.5+us(i,j,k)*xa*0.5
+         xx2=tr(i,nym-j+2,k)*xb*0.5+us(i,nym-j+2,k)*xa*0.5           
+         xx3=tr(i,j,k)*xa*0.5+us(i,j,k)*xb*0.5
+         xx4=-tr(i,nym-j+2,k)*xa*0.5+us(i,nym-j+2,k)*xb*0.5
          wk2(i,2*j-1,k)=xx1+xx2
          wk2(i,2*j,k)=-(xx3+xx4)
       enddo
@@ -470,20 +470,20 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.(ncly.eq.0).and.(nclz.eq.0)) then
       do k=1,nz
       do j=1,ny+2
       do i=1,nx+1
-         xb=sin((i-1)/2.*pi/(nxm))
-         xa=cos((i-1)/2.*pi/(nxm))
-         xx1=(wk1(i,j,k)+wk1(nxm-i+2,j,k))*xa/2
-         xx2=(wk2(i,j,k)-wk2(nxm-i+2,j,k))*xb/2.
+         xb=sin((i-1)*0.5*pi/(nxm))
+         xa=cos((i-1)*0.5*pi/(nxm))
+         xx1=(wk1(i,j,k)+wk1(nxm-i+2,j,k))*xa*0.5
+         xx2=(wk2(i,j,k)-wk2(nxm-i+2,j,k))*xb*0.5
          ps(i,j,k)=xx1+xx2
       enddo
       xb=sin((nxm/4.)*pi/(nxm))
       xa=cos((nxm/4.)*pi/(nxm))
-      ps(nx+1,j,k)=-((wk2(nxm/2+1,j,k)*xa/2.)+(wk2(nxm/2+1,j,k)*xb/2.))
+      ps(nx+1,j,k)=-((wk2(nxm/2+1,j,k)*xa*0.5)+(wk2(nxm/2+1,j,k)*xb*0.5))
       ps(1,j,k)=2.*ps(1,j,k)
       ps(nx,j,k)=2.*ps(nx,j,k)
       enddo
       enddo
-      ps(:,ny,:)=ps(:,ny,:)/2.
+      ps(:,ny,:)=ps(:,ny,:)*0.5
 !*******************fin de la transformation en x*********************************
       wk1(:,:,:)=0. ; wk2(:,:,:)=0.
       do k=1,mz
@@ -491,7 +491,7 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.(ncly.eq.0).and.(nclz.eq.0)) then
          ps(i,ny+1,k)=-ps(i,ny+2,k)*2.
       enddo
       enddo
-      ps(1,ny+1,1)=ps(1,ny+1,1)/2.
+      ps(1,ny+1,1)=ps(1,ny+1,1)*0.5
       do k=1,mz
       do i=1,mx
          ps(i,my,k)=0.
@@ -509,29 +509,29 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.(ncly.eq.0).and.(nclz.eq.0)) then
       do i=1,nxm/2
          xa=cos((k-1)*pi/(nzm))
          xb=sin((k-1)*pi/(nzm))
-         xx1=ps(i,j,k)*xa/2.+ps(i,j,nzm-k+2)*xa/2.
-         xx2=-ps(nxm-i+2,j,k)*xb/2.+ps(nxm-i+2,j,nzm-k+2)*xb/2. 
-         xx3=ps(i,j,k)*xb/2.+ps(i,j,nzm-k+2)*xb/2.
-         xx4=ps(nxm-i+2,j,k)*xa/2.-ps(nxm-i+2,j,nzm-k+2)*xa/2. 
+         xx1=ps(i,j,k)*xa*0.5+ps(i,j,nzm-k+2)*xa*0.5
+         xx2=-ps(nxm-i+2,j,k)*xb*0.5+ps(nxm-i+2,j,nzm-k+2)*xb*0.5 
+         xx3=ps(i,j,k)*xb*0.5+ps(i,j,nzm-k+2)*xb*0.5
+         xx4=ps(nxm-i+2,j,k)*xa*0.5-ps(nxm-i+2,j,nzm-k+2)*xa*0.5 
          wk1(i,j,2*k-1)=xx1+xx2
          wk1(i,j,2*k)=-(xx3+xx4)
       enddo
       do i=nxm/2+1,nx+1
          xa=cos((nzm-k+1)*pi/(nzm))
          xb=sin((nzm-k+1)*pi/(nzm))
-         xx1=ps(i,j,k)*xa/2.+ps(i,j,nzm-k+2)*xa/2.
-         xx2=-ps(nxm-i+2,j,k)*xb/2.+ps(nxm-i+2,j,nzm-k+2)*xb/2.
-         xx3=ps(i,j,k)*xb/2.+ps(i,j,nzm-k+2)*xb/2.
-         xx4=ps(nxm-i+2,j,k)*xa/2.-ps(nxm-i+2,j,nzm-k+2)*xa/2.  
+         xx1=ps(i,j,k)*xa*0.5+ps(i,j,nzm-k+2)*xa*0.5
+         xx2=-ps(nxm-i+2,j,k)*xb*0.5+ps(nxm-i+2,j,nzm-k+2)*xb*0.5
+         xx3=ps(i,j,k)*xb*0.5+ps(i,j,nzm-k+2)*xb*0.5
+         xx4=ps(nxm-i+2,j,k)*xa*0.5-ps(nxm-i+2,j,nzm-k+2)*xa*0.5  
          wk1(i,j,2*k-1)=-(xx1+xx2)
          wk1(i,j,2*k)=-(xx3+xx4) 
       enddo
       xa=cos((nzm-k+1)*pi/(nzm))
       xb=sin((nzm-k+1)*pi/(nzm))
-      xx1=ps(nxm/2+1,j,k)*xa/2.+ps(nxm/2+1,j,nzm-k+2)*xa/2.
-      xx2=-ps(nx+1,j,k)*xb/2.+ps(nx+1,j,nzm-k+2)*xb/2.
-      xx3=ps(nxm/2+1,j,k)*xb/2.+ps(nxm/2+1,j,nzm-k+2)*xb/2.
-      xx4=ps(nx+1,j,k)*xa/2.-ps(nx+1,j,nzm-k+2)*xa/2.
+      xx1=ps(nxm/2+1,j,k)*xa*0.5+ps(nxm/2+1,j,nzm-k+2)*xa*0.5
+      xx2=-ps(nx+1,j,k)*xb*0.5+ps(nx+1,j,nzm-k+2)*xb*0.5
+      xx3=ps(nxm/2+1,j,k)*xb*0.5+ps(nxm/2+1,j,nzm-k+2)*xb*0.5
+      xx4=ps(nx+1,j,k)*xa*0.5-ps(nx+1,j,nzm-k+2)*xa*0.5
       wk1(nxm/2+1,j,2*k-1)=-(xx1-xx2)
       wk1(nxm/2+1,j,2*k)=-(xx3-xx4)    
       enddo
@@ -544,7 +544,7 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.(ncly.eq.0).and.(nclz.eq.0)) then
       ps(2:nx,1,1)=2.*ps(2:nx,1,1)
       ps(nx+1,:,:)=0.
       ps(:,2,:)=0.
-      ps(1,ny+1,2:mz)= ps(1,ny+1,2:mz)/2.
+      ps(1,ny+1,2:mz)= ps(1,ny+1,2:mz)*0.5
       ps(nxm/2+1,ny+1,2:mz)=ps(nxm/2+1,ny+1,2:mz)*0.5
       ps(mx,:,:)=0.; ps(mx-1,:,:)=0.; ps(:,my,:)=0.; ps(:,:,mz)=0.
       tab1(:,:,:)=0. ; tab1(:,:,:)=ps(:,:,:)
@@ -574,10 +574,10 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.(ncly.eq.0).and.(nclz.eq.0)) then
       do k=1,nz+1,2
       do j=1,ny+1
       do i=1,nxm/2+1
-         xb=sin((i-1)/2.*pi/(nxm))
-         xa=cos((i-1)/2.*pi/(nxm))
-         xb1=sin((nxm-i+1)/2.*pi/(nxm))
-         xa1=cos((nxm-i+1)/2.*pi/(nxm))
+         xb=sin((i-1)*0.5*pi/(nxm))
+         xa=cos((i-1)*0.5*pi/(nxm))
+         xb1=sin((nxm-i+1)*0.5*pi/(nxm))
+         xa1=cos((nxm-i+1)*0.5*pi/(nxm))
          wk1(i,j,k)=-tr(i,j,k+1)*xb-us(i,j,k+1)*xa
          wk2(i,j,k)=-(tr(i,j,k+1)*xa-us(i,j,k+1)*xb)
          ps(i,j,k)=tr(i,j,k)*xa-us(i,j,k)*xb
@@ -603,10 +603,10 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.(ncly.eq.0).and.(nclz.eq.0)) then
       do k=1,nz+1
       do j=1,ny+1
       do i=1,nxm/2+1
-         xa=cos((k-1)/2.*pi/(nzm))
-         xb=sin((k-1)/2.*pi/(nzm))
-         xa1=cos((nzm-k+1)/2.*pi/(nzm))
-         xb1=sin((nzm-k+1)/2.*pi/(nzm))
+         xa=cos((k-1)*0.5*pi/(nzm))
+         xb=sin((k-1)*0.5*pi/(nzm))
+         xa1=cos((nzm-k+1)*0.5*pi/(nzm))
+         xb1=sin((nzm-k+1)*0.5*pi/(nzm))
          xx1=wk1(i,j,k)*xb-wk2(i,j,k)*xa
          xx2=wk1(i,j,nzm-k+2)*xa+wk2(i,j,nzm-k+2)*xb 
          xx3=-wk1(i,j,nzm-k+2)*xa1+wk2(i,j,nzm-k+2)*xb1
@@ -638,8 +638,8 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.(ncly.eq.0).and.(nclz.eq.0)) then
       do k=1,nz
       do j=1,ny+1,2
       do i=1,nx+1,2
-         xa=cos((j-1)/2.*pi/(nym))
-         xb=sin((j-1)/2.*pi/(nym))
+         xa=cos((j-1)*0.5*pi/(nym))
+         xb=sin((j-1)*0.5*pi/(nym))
          xx1=-(wk1(i,j,k)*xb-wk1(i+1,j,k)*xa)-(wk1(i,j+1,k)*xa+wk1(i+1,j+1,k)*xb)
          xx2=-(wk1(i+1,j,k)*xb+wk1(i,j,k)*xa)-(wk1(i+1,j+1,k)*xa-wk1(i,j+1,k)*xb)
          xx3=(wk1(i,j,k)*xb+wk1(i+1,j,k)*xa)+(wk1(i,j+1,k)*xa-wk1(i+1,j+1,k)*xb)
@@ -686,7 +686,7 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.(ncly.eq.0).and.(nclz.eq.0)) then
       ps(:,1:ny,nz+1)=0.
       ps(:,ny+1,1:nz)=0.
       ps(2,1,nzm/2+1)=0.
-      ps(nx,nym/2+1,1)=-ps(nx,nym/2+1,1)/2.
+      ps(nx,nym/2+1,1)=-ps(nx,nym/2+1,1)*0.5
       ps(nx+1,nym/2+1,1)=0.
 
       call SLFFT3D(ps,nxm,nym,nzm,nxm/2+1,my,mx,my,work,table,-1,1.,mx,my,mz,nwork)
@@ -720,26 +720,34 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.((nclz.eq.
       enddo
       enddo
       do k=1,nzm
-      do i=1,nxm
       do j=1,nym/2
+      do i=1,nxm
         us(i,j,k)=tr(i,2*(j-1)+1,k)
       enddo
+      enddo
+      enddo
+      do k=1,nzm
       do j=nym/2+1,nym
+      do i=1,nxm
          us(i,j,k)=tr(i,2*nym-2*j+2,k)
       enddo
       enddo
       enddo
+      do k=1,nzm/2
       do j=1,nym
       do i=1,nxm
-      do k=1,nzm/2
         ps(i,j,k)=us(i,j,2*(k-1)+1)
       enddo
+      enddo
+      enddo
       do k=nzm/2+1,nzm
+      do j=1,nym
+      do i=1,nxm
          ps(i,j,k)=us(i,j,2*nzm-2*k+2)
       enddo
       enddo
       enddo
-
+      
       call SLFFT3D(ps,nxm,nym,nzm,mx,my,mx/2,my,work,table,1,1./nxm/nym/nzm,mx,my,mz,nwork)
   
       do k=1,nzm
@@ -760,12 +768,12 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.((nclz.eq.
       do k=1,nz
       do j=1,ny
       do i=1,nxm/2+1
-         xa=cos((k-1)/2.*pi/(nzm))
-         xb=sin((k-1)/2.*pi/(nzm))
-         xx1=tr(i,j,k)*xa/2.+us(i,j,k)*xb/2.
-         xx2=tr(i,j,nzm-k+2)*xa/2.-us(i,j,nzm-k+2)*xb/2.           
-         xx3=-tr(i,j,k)*xb/2.+us(i,j,k)*xa/2.
-         xx4=tr(i,j,nzm-k+2)*xb/2.+us(i,j,nzm-k+2)*xa/2.           
+         xa=cos((k-1)*0.5*pi/(nzm))*0.5
+         xb=sin((k-1)*0.5*pi/(nzm))*0.5
+         xx1=tr(i,j,k)*xa+us(i,j,k)*xb
+         xx2=tr(i,j,nzm-k+2)*xa-us(i,j,nzm-k+2)*xb           
+         xx3=-tr(i,j,k)*xb+us(i,j,k)*xa
+         xx4=tr(i,j,nzm-k+2)*xb+us(i,j,nzm-k+2)*xa          
          wk2(i,j,k)=(xx3+xx4) 
          wk1(i,j,k)=xx1+xx2      
       enddo
@@ -786,14 +794,12 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.((nclz.eq.
       do k=1,nz
       do j=1,ny 
       do i=1,nxm/2+1
-         xa=cos((j-1)/2.*pi/(nym))
-         xb=sin((j-1)/2.*pi/(nym))
-         xa1=cos((nym-j+1)/2.*pi/(nym))
-         xb1=sin((nym-j+1)/2.*pi/(nym))
-         xx1=wk1(i,j,k)*xa/2.+wk2(i,j,k)*xb/2.
-         xx2=wk1(i,nym-j+2,k)*xa/2.-wk2(i,nym-j+2,k)*xb/2.
-         xx3=-wk1(i,j,k)*xb/2.+wk2(i,j,k)*xa/2.
-         xx4=wk1(i,nym-j+2,k)*xb/2.+wk2(i,nym-j+2,k)*xa/2.           
+         xa=cos((j-1)*0.5*pi/(nym))*0.5
+         xb=sin((j-1)*0.5*pi/(nym))*0.5
+         xx1=wk1(i,j,k)*xa+wk2(i,j,k)*xb
+         xx2=wk1(i,nym-j+2,k)*xa-wk2(i,nym-j+2,k)*xb
+         xx3=-wk1(i,j,k)*xb+wk2(i,j,k)*xa
+         xx4=wk1(i,nym-j+2,k)*xb+wk2(i,nym-j+2,k)*xa         
          us(i,j,k)=xx3+xx4            
          tr(i,j,k)=xx1+xx2      
       enddo
@@ -814,10 +820,10 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.((nclz.eq.
       do k=1,nz
       do j=1,ny
       do i=1,nx
-         xb=sin((i-1)/2.*pi/(nxm))
-         xa=cos((i-1)/2.*pi/(nxm))
-         xx1=(tr(i,j,k)+tr(nxm-i+2,j,k))*xa/2
-         xx2=(us(i,j,k)-us(nxm-i+2,j,k))*xb/2.
+         xb=sin((i-1)*0.5*pi/(nxm))*0.5
+         xa=cos((i-1)*0.5*pi/(nxm))*0.5
+         xx1=(tr(i,j,k)+tr(nxm-i+2,j,k))*xa
+         xx2=(us(i,j,k)-us(nxm-i+2,j,k))*xb
          ps(i,j,k)=xx1+xx2
       enddo
       enddo
@@ -847,10 +853,10 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.((nclz.eq.
      do k=1,nz
      do j=1,ny
      do i=1,nxm/2+1
-        xb=sin((i-1)/2.*pi/(nxm))
-        xa=cos((i-1)/2.*pi/(nxm))
-        xb1=sin((nxm-i+1)/2.*pi/(nxm))
-        xa1=cos((nxm-i+1)/2.*pi/(nxm))
+        xb=sin((i-1)*0.5*pi/(nxm))
+        xa=cos((i-1)*0.5*pi/(nxm))
+        xb1=sin((nxm-i+1)*0.5*pi/(nxm))
+        xa1=cos((nxm-i+1)*0.5*pi/(nxm))
        tr(i,j,k)=wk1(i,j,k)*xa+wk2(i,j,k)*xa1
         ps(i,j,k)=(wk1(i,j,k)*xb-wk2(i,j,k)*xb1)
      enddo
@@ -878,10 +884,10 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.((nclz.eq.
      do k=1,nz
      do j=1,ny
      do i=1,nxm/2+1
-        xa=cos((j-1)/2.*pi/(nym))
-        xb=sin((j-1)/2.*pi/(nym))
-        xa1=cos((nym-j+1)/2.*pi/(nym))
-        xb1=sin((nym-j+1)/2.*pi/(nym))
+        xa=cos((j-1)*0.5*pi/(nym))
+        xb=sin((j-1)*0.5*pi/(nym))
+        xa1=cos((nym-j+1)*0.5*pi/(nym))
+        xb1=sin((nym-j+1)*0.5*pi/(nym))
         xx1=tr(i,j,k)*xa-ps(i,j,k)*xa1
         xx2=tr(i,nym-j+2,k)*xb+ps(i,nym-j+2,k)*xa 
         xx3=-tr(i,nym-j+2,k)*xb1+ps(i,nym-j+2,k)*xb
@@ -912,10 +918,10 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.((nclz.eq.
      do k=1,nz
      do j=1,ny
      do i=1,nxm/2+1
-        xa=cos((k-1)/2.*pi/(nzm))
-        xb=sin((k-1)/2.*pi/(nzm))
-        xa1=cos((nzm-k+1)/2.*pi/(nzm))
-        xb1=sin((nzm-k+1)/2.*pi/(nzm))
+        xa=cos((k-1)*0.5*pi/(nzm))
+        xb=sin((k-1)*0.5*pi/(nzm))
+        xa1=cos((nzm-k+1)*0.5*pi/(nzm))
+        xb1=sin((nzm-k+1)*0.5*pi/(nzm))
         xx1=wk1(i,j,k)*xa-wk2(i,j,k)*xa1
         xx2=wk1(i,j,nzm-k+2)*xb+wk2(i,j,nzm-k+2)*xa 
         xx3=-wk1(i,j,nzm-k+2)*xb1+wk2(i,j,nzm-k+2)*xb
@@ -1028,14 +1034,14 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.(nclz.eq.0
      do k=1,nz
      do j=1,ny    
      do i=1,nxm/2+1
-        xa=cos((j-1)/2.*pi/(nym))
-        xb=sin((j-1)/2.*pi/(nym))
-        xa1=cos((nym-j+1)/2.*pi/(nym))
-        xb1=sin((nym-j+1)/2.*pi/(nym))
-        xx1=tr(i,j,k)*xa/2.+us(i,j,k)*xb/2.
-        xx2=tr(i,nym-j+2,k)*xa/2.-us(i,nym-j+2,k)*xb/2.
-        xx3=-tr(i,j,k)*xb/2.+us(i,j,k)*xa/2.
-        xx4=tr(i,nym-j+2,k)*xb/2.+us(i,nym-j+2,k)*xa/2.           
+        xa=cos((j-1)*0.5*pi/(nym))
+        xb=sin((j-1)*0.5*pi/(nym))
+        xa1=cos((nym-j+1)*0.5*pi/(nym))
+        xb1=sin((nym-j+1)*0.5*pi/(nym))
+        xx1=tr(i,j,k)*xa*0.5+us(i,j,k)*xb*0.5
+        xx2=tr(i,nym-j+2,k)*xa*0.5-us(i,nym-j+2,k)*xb*0.5
+        xx3=-tr(i,j,k)*xb*0.5+us(i,j,k)*xa*0.5
+        xx4=tr(i,nym-j+2,k)*xb*0.5+us(i,nym-j+2,k)*xa*0.5           
         wk1(i,j,k)=xx1+xx2  
         wk2(i,j,k)=xx3+xx4 
      enddo
@@ -1058,15 +1064,15 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.(nclz.eq.0
      do k=1,mz
      do j=1,my
      do i=1,nx+1
-        xb=sin((i-1)/2.*pi/(nxm))
-        xa=cos((i-1)/2.*pi/(nxm))
-        xx1=(wk1(i,j,k)+wk1(nxm-i+2,j,k))*xa/2
-        xx2=(wk2(i,j,k)-wk2(nxm-i+2,j,k))*xb/2.
+        xb=sin((i-1)*0.5*pi/(nxm))
+        xa=cos((i-1)*0.5*pi/(nxm))
+        xx1=(wk1(i,j,k)+wk1(nxm-i+2,j,k))*xa*0.5
+        xx2=(wk2(i,j,k)-wk2(nxm-i+2,j,k))*xb*0.5
         ps(i,j,k)=xx1+xx2
      enddo
      xb=sin((nxm/4.)*pi/(nxm))
      xa=cos((nxm/4.)*pi/(nxm))
-     ps(nx+1,j,k)=-((wk2(nxm/2+1,j,k)*xa/2.)+(wk2(nxm/2+1,j,k)*xb/2.))
+     ps(nx+1,j,k)=-((wk2(nxm/2+1,j,k)*xa*0.5)+(wk2(nxm/2+1,j,k)*xb*0.5))
      ps(1,j,k)=2.*ps(1,j,k)
      ps(nx,j,k)=2.*ps(nx,j,k)
      enddo
@@ -1086,29 +1092,29 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.(nclz.eq.0
      do i=1,nxm/2
         xa=cos((k-1)*pi/(nzm))
         xb=sin((k-1)*pi/(nzm))
-        xx1=ps(i,j,k)*xa/2.+ps(i,j,nzm-k+2)*xa/2.
-        xx2=-ps(nxm-i+2,j,k)*xb/2.+ps(nxm-i+2,j,nzm-k+2)*xb/2. 
-        xx3=ps(i,j,k)*xb/2.+ps(i,j,nzm-k+2)*xb/2.
-        xx4=ps(nxm-i+2,j,k)*xa/2.-ps(nxm-i+2,j,nzm-k+2)*xa/2. 
+        xx1=ps(i,j,k)*xa*0.5+ps(i,j,nzm-k+2)*xa*0.5
+        xx2=-ps(nxm-i+2,j,k)*xb*0.5+ps(nxm-i+2,j,nzm-k+2)*xb*0.5 
+        xx3=ps(i,j,k)*xb*0.5+ps(i,j,nzm-k+2)*xb*0.5
+        xx4=ps(nxm-i+2,j,k)*xa*0.5-ps(nxm-i+2,j,nzm-k+2)*xa*0.5 
         us(i,j,2*k-1)=xx1+xx2
         us(i,j,2*k)=-(xx3+xx4)
      enddo
      do i=nxm/2+1,nx+1
         xa=cos((nzm-k+1)*pi/(nzm))
         xb=sin((nzm-k+1)*pi/(nzm))
-        xx1=ps(i,j,k)*xa/2.+ps(i,j,nzm-k+2)*xa/2.
-        xx2=-ps(nxm-i+2,j,k)*xb/2.+ps(nxm-i+2,j,nzm-k+2)*xb/2.
-        xx3=ps(i,j,k)*xb/2.+ps(i,j,nzm-k+2)*xb/2.
-        xx4=ps(nxm-i+2,j,k)*xa/2.-ps(nxm-i+2,j,nzm-k+2)*xa/2.  
+        xx1=ps(i,j,k)*xa*0.5+ps(i,j,nzm-k+2)*xa*0.5
+        xx2=-ps(nxm-i+2,j,k)*xb*0.5+ps(nxm-i+2,j,nzm-k+2)*xb*0.5
+        xx3=ps(i,j,k)*xb*0.5+ps(i,j,nzm-k+2)*xb*0.5
+        xx4=ps(nxm-i+2,j,k)*xa*0.5-ps(nxm-i+2,j,nzm-k+2)*xa*0.5  
         us(i,j,2*k-1)=-(xx1+xx2)
         us(i,j,2*k)=-(xx3+xx4) 
      enddo
      xa=cos((nzm-k+1)*pi/(nzm))
      xb=sin((nzm-k+1)*pi/(nzm))
-     xx1=ps(nxm/2+1,j,k)*xa/2.+ps(nxm/2+1,j,nzm-k+2)*xa/2.
-     xx2=-ps(nx+1,j,k)*xb/2.+ps(nx+1,j,nzm-k+2)*xb/2.
-     xx3=ps(nxm/2+1,j,k)*xb/2.+ps(nxm/2+1,j,nzm-k+2)*xb/2.
-     xx4=ps(nx+1,j,k)*xa/2.-ps(nx+1,j,nzm-k+2)*xa/2.
+     xx1=ps(nxm/2+1,j,k)*xa*0.5+ps(nxm/2+1,j,nzm-k+2)*xa*0.5
+     xx2=-ps(nx+1,j,k)*xb*0.5+ps(nx+1,j,nzm-k+2)*xb*0.5
+     xx3=ps(nxm/2+1,j,k)*xb*0.5+ps(nxm/2+1,j,nzm-k+2)*xb*0.5
+     xx4=ps(nx+1,j,k)*xa*0.5-ps(nx+1,j,nzm-k+2)*xa*0.5
      us(nxm/2+1,j,2*k-1)=-(xx1-xx2)
      us(nxm/2+1,j,2*k)=-(xx3-xx4)
      enddo
@@ -1150,10 +1156,10 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.(nclz.eq.0
      do k=1,nz+1,2
      do j=1,ny         
      do i=1,nxm/2+1
-        xb=sin((i-1)/2.*pi/(nxm))
-        xa=cos((i-1)/2.*pi/(nxm))
-        xb1=sin((nxm-i+1)/2.*pi/(nxm))
-        xa1=cos((nxm-i+1)/2.*pi/(nxm))
+        xb=sin((i-1)*0.5*pi/(nxm))
+        xa=cos((i-1)*0.5*pi/(nxm))
+        xb1=sin((nxm-i+1)*0.5*pi/(nxm))
+        xa1=cos((nxm-i+1)*0.5*pi/(nxm))
         wk1(i,j,k)=-tr(i,j,k+1)*xb-us(i,j,k+1)*xa
         wk2(i,j,k)=-(tr(i,j,k+1)*xa-us(i,j,k+1)*xb)
         ps(i,j,k)=tr(i,j,k)*xa-us(i,j,k)*xb
@@ -1201,10 +1207,10 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.(nclz.eq.0
      do k=1,nz+1
      do j=1,ny
      do i=1,nxm/2+1
-        xa=cos((k-1)/2.*pi/(nzm))
-        xb=sin((k-1)/2.*pi/(nzm))
-        xa1=cos((nzm-k+1)/2.*pi/(nzm))
-        xb1=sin((nzm-k+1)/2.*pi/(nzm))
+        xa=cos((k-1)*0.5*pi/(nzm))
+        xb=sin((k-1)*0.5*pi/(nzm))
+        xa1=cos((nzm-k+1)*0.5*pi/(nzm))
+        xb1=sin((nzm-k+1)*0.5*pi/(nzm))
         xx1=wk1(i,j,k)*xb-wk2(i,j,k)*xa
         xx2=wk1(i,j,nzm-k+2)*xa+wk2(i,j,nzm-k+2)*xb 
         xx3=-wk1(i,j,nzm-k+2)*xa1+wk2(i,j,nzm-k+2)*xb1
@@ -1244,8 +1250,8 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.(nclz.eq.0
      do k=1,nz
      do j=1,nym/2+1
      do i=1,nxm/2,2
-        xa=cos((j-1)/2.*pi/(nym))
-        xb=sin((j-1)/2.*pi/(nym))
+        xa=cos((j-1)*0.5*pi/(nym))
+        xb=sin((j-1)*0.5*pi/(nym))
         xx1=-(wk1(i,j,k)*xb-wk1(i+1,j,k)*xa)+(wk1(i+1,nym-j+2,k)*xb+wk1(i,nym-j+2,k)*xa)
         xx2=-(wk1(i+1,j,k)*xb+wk1(i,j,k)*xa)-(wk1(i,nym-j+2,k)*xb-wk1(i+1,nym-j+2,k)*xa)
         xx3=(wk1(i,j,k)*xb+wk1(i+1,j,k)*xa)+(wk1(i+1,nym-j+2,k)*xb-wk1(i,nym-j+2,k)*xa)
@@ -1256,8 +1262,8 @@ if (((nclx.eq.2).or.(nclx.eq.1)).and.((ncly.eq.1).or.(ncly.eq.2)).and.(nclz.eq.0
         ps(i+1,j,k)=xx2
      enddo
      do i=nxm/2+1,nx+1,2
-        xa=cos((j-1)/2.*pi/(nym))
-        xb=sin((j-1)/2.*pi/(nym))
+        xa=cos((j-1)*0.5*pi/(nym))
+        xb=sin((j-1)*0.5*pi/(nym))
         xx1=-(wk1(i,j,k)*xb-wk1(i+1,j,k)*xa)-(wk1(i+1,nym-j+2,k)*xb+wk1(i,nym-j+2,k)*xa)
         xx2=-(wk1(i+1,j,k)*xb+wk1(i,j,k)*xa)+(wk1(i,nym-j+2,k)*xb-wk1(i+1,nym-j+2,k)*xa)
         xx3=(wk1(i,j,k)*xb+wk1(i+1,j,k)*xa)-(wk1(i+1,nym-j+2,k)*xb-wk1(i,nym-j+2,k)*xa)
@@ -1369,10 +1375,10 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do i=1,nxm/2+1
          xa=cos((j-1)*pi/(nym))
          xb=sin((j-1)*pi/(nym))
-         xx1=us(i,j,k)*xa/2.+ps(i,j,k)*xb/2.
-         xx2=us(i,nym-j+2,k)*xa/2.-ps(i,nym-j+2,k)*xb/2.    
-         xx3=-us(i,j,k)*xb/2.+ps(i,j,k)*xa/2.
-         xx4=-(us(i,nym-j+2,k)*xb/2.+ps(i,nym-j+2,k)*xa/2.)          
+         xx1=us(i,j,k)*xa*0.5+ps(i,j,k)*xb*0.5
+         xx2=us(i,nym-j+2,k)*xa*0.5-ps(i,nym-j+2,k)*xb*0.5    
+         xx3=-us(i,j,k)*xb*0.5+ps(i,j,k)*xa*0.5
+         xx4=-(us(i,nym-j+2,k)*xb*0.5+ps(i,nym-j+2,k)*xa*0.5)          
          wk1(i,2*j-1,k)=xx1+xx2
          wk1(i,2*j,k)=xx3+xx4
       enddo
@@ -1380,10 +1386,10 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do j=1,nym/2
          xa=cos((j-1)*pi/(nym))
          xb=sin((j-1)*pi/(nym))
-         xx1=us(nxm/2+1,j,k)*xa/2.-ps(nxm/2+1,nym-j+2,k)*xb/2.
-         xx2=us(nxm/2+1,nym-j+2,k)*xa/2.+ps(mx,nym-j+2,k)*xb/2.
-         xx3=us(nxm/2+1,j,k)*xb/2.+ps(nxm/2+1,nym-j+2,k)*xa/2.
-         xx4=-us(nxm/2+1,nym-j+2,k)*xb/2.+ps(mx,nym-j+2,k)*xa/2.             
+         xx1=us(nxm/2+1,j,k)*xa*0.5-ps(nxm/2+1,nym-j+2,k)*xb*0.5
+         xx2=us(nxm/2+1,nym-j+2,k)*xa*0.5+ps(mx,nym-j+2,k)*xb*0.5
+         xx3=us(nxm/2+1,j,k)*xb*0.5+ps(nxm/2+1,nym-j+2,k)*xa*0.5
+         xx4=-us(nxm/2+1,nym-j+2,k)*xb*0.5+ps(mx,nym-j+2,k)*xa*0.5             
          wk1(nxm/2+1,2*j-1,k)=xx1+xx2
          wk1(nxm/2+1,2*j,k)=-xx3+xx4
       enddo
@@ -1401,10 +1407,10 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
          xb=sin((j-1)*pi/(nym))
          xa1=cos((nym-j+1)*pi/(nym))
          xb1=sin((nym-j+1)*pi/(nym))
-         xx1=-us(i,j,k)*xb/2.+ps(i,j,k)*xa/2.
-         xx2=us(i,nym-j+2,k)*xb/2.+ps(i,nym-j+2,k)*xa/2.     
-         xx3=us(i,j,k)*xa/2.+ps(i,j,k)*xb/2.
-         xx4=-us(i,nym-j+2,k)*xa/2.+ps(i,nym-j+2,k)*xb/2.       
+         xx1=-us(i,j,k)*xb*0.5+ps(i,j,k)*xa*0.5
+         xx2=us(i,nym-j+2,k)*xb*0.5+ps(i,nym-j+2,k)*xa*0.5     
+         xx3=us(i,j,k)*xa*0.5+ps(i,j,k)*xb*0.5
+         xx4=-us(i,nym-j+2,k)*xa*0.5+ps(i,nym-j+2,k)*xb*0.5       
          wk2(i,2*j-1,k)=xx1+xx2
          wk2(i,2*j,k)=-(xx3+xx4)
       enddo
@@ -1431,10 +1437,10 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do i=1,nxm/2+2
          xa=cos((i-1)*pi/(nxm))
          xb=sin((i-1)*pi/(nxm))
-         xx1=wk1(i,j,k)*xa/2.+wk1(nxm-i+2,j,k)*xa/2.
-         xx2=-wk2(nxm-i+2,j,k)*xb/2+wk2(i,j,k)*xb/2. 
-         xx3=wk1(i,j,k)*xb/2.+wk1(nxm-i+2,j,k)*xb/2.
-         xx4=wk2(nxm-i+2,j,k)*xa/2.+wk2(nxm-i+2,j,k)*xa/2. 
+         xx1=wk1(i,j,k)*xa*0.5+wk1(nxm-i+2,j,k)*xa*0.5
+         xx2=-wk2(nxm-i+2,j,k)*xb*0.5+wk2(i,j,k)*xb*0.5 
+         xx3=wk1(i,j,k)*xb*0.5+wk1(nxm-i+2,j,k)*xb*0.5
+         xx4=wk2(nxm-i+2,j,k)*xa*0.5+wk2(nxm-i+2,j,k)*xa*0.5 
          us(2*i-1,j,k)=xx1+xx2
          us(2*i,j,k)=-(xx3+xx4)
       enddo
@@ -1442,9 +1448,9 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
       enddo
       do k=1,mz
       do j=1,my
-         xb=sin(pi/2.)
-         xx2=-wk2(nxm/2+1,j,k)*xb/2-wk2(nxm/2+1,j,k)*xb/2. 
-         xx3=wk1(nxm/2+1,j,k)*xb/2.+wk1(nxm/2+1,j,k)*xb/2.
+         xb=sin(pi*0.5)
+         xx2=-wk2(nxm/2+1,j,k)*xb*0.5-wk2(nxm/2+1,j,k)*xb*0.5 
+         xx3=wk1(nxm/2+1,j,k)*xb*0.5+wk1(nxm/2+1,j,k)*xb*0.5
          us(mx-1,j,k)=-xx2
          us(mx,j,k)=-xx3
       enddo
@@ -1472,14 +1478,14 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do i=1,mx,2
          xa=cos((k-1)*pi/(nzm))
          xb=sin((k-1)*pi/(nzm))
-         xx1=ps(i,j,k)*xa/2.+ps(i,j,nzm-k+2)*xa/2.
-         xx2=-ps(i+1,j,k)*xb/2.+ps(i+1,j,nzm-k+2)*xb/2. 
-         xx3=ps(i,j,k)*xb/2.+ps(i,j,nzm-k+2)*xb/2.
-         xx4=-ps(i+1,j,k)*xa/2.+ps(i+1,j,nzm-k+2)*xa/2.
-         xx5=ps(i,j,k)*xb/2.-ps(i,j,nzm-k+2)*xb/2.
-         xx6=-ps(i+1,j,k)*xa/2.-ps(i+1,j,nzm-k+2)*xa/2. 
-         xx7=ps(i,j,k)*xa/2.-ps(i,j,nzm-k+2)*xa/2.
-         xx8=ps(i+1,j,k)*xb/2.+ps(i+1,j,nzm-k+2)*xb/2.
+         xx1=ps(i,j,k)*xa*0.5+ps(i,j,nzm-k+2)*xa*0.5
+         xx2=-ps(i+1,j,k)*xb*0.5+ps(i+1,j,nzm-k+2)*xb*0.5 
+         xx3=ps(i,j,k)*xb*0.5+ps(i,j,nzm-k+2)*xb*0.5
+         xx4=-ps(i+1,j,k)*xa*0.5+ps(i+1,j,nzm-k+2)*xa*0.5
+         xx5=ps(i,j,k)*xb*0.5-ps(i,j,nzm-k+2)*xb*0.5
+         xx6=-ps(i+1,j,k)*xa*0.5-ps(i+1,j,nzm-k+2)*xa*0.5 
+         xx7=ps(i,j,k)*xa*0.5-ps(i,j,nzm-k+2)*xa*0.5
+         xx8=ps(i+1,j,k)*xb*0.5+ps(i+1,j,nzm-k+2)*xb*0.5
          tab1(i,j,2*k-1)=xx1-xx2
          tab1(i,j,2*k)=-(xx3+xx4)
          tab1(i+1,j,2*k-1)=-(xx5+xx6)
@@ -1496,7 +1502,7 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
       ps(2:mx,1,1)=2.*ps(2:mx,1,1)
       ps(nx+1,:,:)=0.
       ps(:,2,:)=0.
-      ps(1,ny+1,2:mz)= ps(1,ny+1,2:mz)/2.
+      ps(1,ny+1,2:mz)= ps(1,ny+1,2:mz)*0.5
       ps(:,:,mz)=-ps(:,:,mz-1)
       ps(:,:,mz-1)=0.      
       tab1(:,:,:)=0. ; tab1(:,:,:)=ps(:,:,:)
@@ -1508,8 +1514,8 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
          tr(nxm+1,j,k)=-tr(mx,j,k)
       enddo
       do j=2,my
-         tr(nxm/2+1,j,k)=tr(nxm/2+1,j,k)/2.
-         tr(nxm/2+2,j,k)=tr(nxm/2+2,j,k)/2.
+         tr(nxm/2+1,j,k)=tr(nxm/2+1,j,k)*0.5
+         tr(nxm/2+2,j,k)=tr(nxm/2+2,j,k)*0.5
       enddo
       enddo
       wk1(:,:,:)=0. ;wk2(:,:,:)=0.
@@ -1530,8 +1536,8 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do k=1,mz
       do j=1,my
       do i=1,mx-1,2
-         xb=sin((i-1)/2.*pi/(nxm))
-         xa=cos((i-1)/2.*pi/(nxm))
+         xb=sin((i-1)*0.5*pi/(nxm))
+         xa=cos((i-1)*0.5*pi/(nxm))
          us((i+1)/2,j,k)=wk1(i+1,j,k)*xb+wk2(nxm-i+1,j,k)*xb
          ps((i+1)/2,j,k)=-wk1(i+1,j,k)*xa-wk2(nxm-i+1,j,k)*xa
          tab1((i+1)/2,j,k)=wk1(i,j,k)*xa+wk2(nxm-i+2,j,k)*xa
@@ -1559,24 +1565,24 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do k=1,mz
       do j=1,ny+1,2
       do i=1,nxm/2+1
-         xa=cos((j-1)/2.*pi/nym)
-         xb=sin((j-1)/2.*pi/nym)
-         xx1=(tab1(i,j,k)+tab1(nxm-i+2,j,k))*xa/2.-(tr(i,j,k)-tr(nxm-i+2,j,k))*xb/2.
-         xx2=(tab1(i,j,k)+tab1(nxm-i+2,j,k))*xa/2.+(tr(i,j,k)-tr(nxm-i+2,j,k))*xb/2.
-         xx3=(tab1(i,j+1,k)+tab1(nxm-i+2,j+1,k))*xa/2.-(tr(i,j+1,k)-tr(nxm-i+2,j+1,k))*xb/2.
-         xx4=-((tab1(i,j+1,k)+tab1(nxm-i+2,j+1,k))*xa/2.+(tr(i,j+1,k)-tr(nxm-i+2,j+1,k))*xb/2.)
-         xx5=-((tab1(i,j,k)+tab1(nxm-i+2,j,k))*xb/2.-(tr(i,j,k)-tr(nxm-i+2,j,k))*xa/2.)
-         xx6=(tab1(i,j,k)+tab1(nxm-i+2,j,k))*xb/2.+(tr(i,j,k)-tr(nxm-i+2,j,k))*xa/2.
-         xx7=-((tab1(i,j+1,k)+tab1(nxm-i+2,j+1,k))*xb/2.-(tr(i,j+1,k)-tr(nxm-i+2,j+1,k))*xa/2.)
-         xx8=-((tab1(i,j+1,k)+tab1(nxm-i+2,j+1,k))*xb/2.+(tr(i,j+1,k)-tr(nxm-i+2,j+1,k))*xa/2.)
-         yy1=(us(i,j,k)+us(nxm-i+2,j,k))*xa/2.-(ps(i,j,k)-ps(nxm-i+2,j,k))*xb/2.
-         yy2=(us(i,j,k)+us(nxm-i+2,j,k))*xa/2.+(ps(i,j,k)-ps(nxm-i+2,j,k))*xb/2.
-         yy3=-((us(i,j+1,k)+us(nxm-i+2,j+1,k))*xa/2.+(ps(i,j+1,k)-ps(nxm-i+2,j+1,k))*xb/2.)
-         yy4=(us(i,j,k)+us(nxm-i+2,j,k))*xb/2.+(ps(i,j,k)-ps(nxm-i+2,j,k))*xa/2.
-         yy5=-((us(i,j+1,k)+us(nxm-i+2,j+1,k))*xb/2.-(ps(i,j+1,k)-ps(nxm-i+2,j+1,k))*xa/2.)
-         yy6=-((us(i,j+1,k)+us(nxm-i+2,j+1,k))*xb/2.+(ps(i,j+1,k)-ps(nxm-i+2,j+1,k))*xa/2.)
-         yy7=(us(i,j+1,k)+us(nxm-i+2,j+1,k))*xa/2.-(ps(i,j+1,k)-ps(nxm-i+2,j+1,k))*xb/2.
-         yy8=-((us(i,j,k)+us(nxm-i+2,j,k))*xb/2.-(ps(i,j,k)-ps(nxm-i+2,j,k))*xa/2.)
+         xa=cos((j-1)*0.5*pi/nym)
+         xb=sin((j-1)*0.5*pi/nym)
+         xx1=(tab1(i,j,k)+tab1(nxm-i+2,j,k))*xa*0.5-(tr(i,j,k)-tr(nxm-i+2,j,k))*xb*0.5
+         xx2=(tab1(i,j,k)+tab1(nxm-i+2,j,k))*xa*0.5+(tr(i,j,k)-tr(nxm-i+2,j,k))*xb*0.5
+         xx3=(tab1(i,j+1,k)+tab1(nxm-i+2,j+1,k))*xa*0.5-(tr(i,j+1,k)-tr(nxm-i+2,j+1,k))*xb*0.5
+         xx4=-((tab1(i,j+1,k)+tab1(nxm-i+2,j+1,k))*xa*0.5+(tr(i,j+1,k)-tr(nxm-i+2,j+1,k))*xb*0.5)
+         xx5=-((tab1(i,j,k)+tab1(nxm-i+2,j,k))*xb*0.5-(tr(i,j,k)-tr(nxm-i+2,j,k))*xa*0.5)
+         xx6=(tab1(i,j,k)+tab1(nxm-i+2,j,k))*xb*0.5+(tr(i,j,k)-tr(nxm-i+2,j,k))*xa*0.5
+         xx7=-((tab1(i,j+1,k)+tab1(nxm-i+2,j+1,k))*xb*0.5-(tr(i,j+1,k)-tr(nxm-i+2,j+1,k))*xa*0.5)
+         xx8=-((tab1(i,j+1,k)+tab1(nxm-i+2,j+1,k))*xb*0.5+(tr(i,j+1,k)-tr(nxm-i+2,j+1,k))*xa*0.5)
+         yy1=(us(i,j,k)+us(nxm-i+2,j,k))*xa*0.5-(ps(i,j,k)-ps(nxm-i+2,j,k))*xb*0.5
+         yy2=(us(i,j,k)+us(nxm-i+2,j,k))*xa*0.5+(ps(i,j,k)-ps(nxm-i+2,j,k))*xb*0.5
+         yy3=-((us(i,j+1,k)+us(nxm-i+2,j+1,k))*xa*0.5+(ps(i,j+1,k)-ps(nxm-i+2,j+1,k))*xb*0.5)
+         yy4=(us(i,j,k)+us(nxm-i+2,j,k))*xb*0.5+(ps(i,j,k)-ps(nxm-i+2,j,k))*xa*0.5
+         yy5=-((us(i,j+1,k)+us(nxm-i+2,j+1,k))*xb*0.5-(ps(i,j+1,k)-ps(nxm-i+2,j+1,k))*xa*0.5)
+         yy6=-((us(i,j+1,k)+us(nxm-i+2,j+1,k))*xb*0.5+(ps(i,j+1,k)-ps(nxm-i+2,j+1,k))*xa*0.5)
+         yy7=(us(i,j+1,k)+us(nxm-i+2,j+1,k))*xa*0.5-(ps(i,j+1,k)-ps(nxm-i+2,j+1,k))*xb*0.5
+         yy8=-((us(i,j,k)+us(nxm-i+2,j,k))*xb*0.5-(ps(i,j,k)-ps(nxm-i+2,j,k))*xa*0.5)
          wk2(2*i-1,(j+1)/2,k)=xx1+xx8+yy1+yy6
          wk2(2*i,(j+1)/2,k)=-xx6-xx3-yy4-yy7
          wk2(2*i-1,nym-(j+1)/2+2,k)=xx2+xx7+yy2+yy5
@@ -1585,8 +1591,8 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
       enddo
       enddo
       do k=1,mz
-         wk2(nxm/2+1,1,k)=wk2(nxm/2+1,1,k)/2.
-         wk2(nxm/2+2,1,k)=wk2(nxm/2+2,1,k)/2.
+         wk2(nxm/2+1,1,k)=wk2(nxm/2+1,1,k)*0.5
+         wk2(nxm/2+2,1,k)=wk2(nxm/2+2,1,k)*0.5
          wk2(mx,1,k)=0.
          wk2(nx+1,1,k)=wk2(nx+1,1,k)*2.
          wk2(:,ny+1,k)=0.
@@ -1597,8 +1603,8 @@ if ((ncly.eq.0).and.(nclx.eq.0).and.(nclz.eq.0)) then
       do k=1,nz+1,2
       do j=1,ny
       do i=1,nx+1,2
-         xa=cos((k-1)/2.*pi/(nzm))
-         xb=sin((k-1)/2.*pi/(nzm))
+         xa=cos((k-1)*0.5*pi/(nzm))
+         xb=sin((k-1)*0.5*pi/(nzm))
          xx1=(wk2(i,j,k)*xa+wk2(i+1,j,k)*xb)+(-wk2(i,j,k+1)*xb+wk2(i+1,j,k+1)*xa)
          xx2=(-wk2(i,j,k)*xb+wk2(i+1,j,k)*xa)-(wk2(i,j,k+1)*xa+wk2(i+1,j,k+1)*xb) 
          xx3=(wk2(i,j,k)*xa-wk2(i+1,j,k)*xb)-(wk2(i,j,k+1)*xb+wk2(i+1,j,k+1)*xa) 

@@ -31,7 +31,6 @@ integer, intent(in) :: nxm,nym,nzm,mxx,myx,mxy,myy,mx,my,mz,nwork
 integer, intent(in) :: isign
 real(8), intent(in) :: scale
 real(8),  intent(inout), dimension(mx,my,mz) :: x
-real(8), dimension(nxm,nym,nzm) :: test
 real(8), dimension(nwork) :: work
 real(8), dimension(100+2*(nxm+nym+nzm)) :: table
 
@@ -41,10 +40,8 @@ integer :: i,j,k
 if(fftw) then ! FFTW
 
    if (isign==1) then
-!   
-test=x(1:nxm,1:nym,1:nzm)
 
-      call fftw_execute_dft_r2c(fftw_plan1, test, fftw_cmp)
+      call fftw_execute_dft_r2c(fftw_plan1, x, fftw_cmp)
 
       do k=1,nzm
       do j=1,nym
@@ -68,12 +65,12 @@ test=x(1:nxm,1:nym,1:nzm)
       enddo
       enddo   
       
-      call fftw_execute_dft_c2r(fftw_plan2, fftw_cmp, test)
+      call fftw_execute_dft_c2r(fftw_plan2, fftw_cmp, x)
 
       do k=1,nzm
       do j=1,nym
       do i=1,nxm
-         x(i,j,k)=test(i,j,k)*scale
+         x(i,j,k)=x(i,j,k)*scale
       enddo
       enddo
       enddo   
@@ -105,7 +102,7 @@ end subroutine SLFFT3D
 subroutine init_SLFFT3D(nxm,nym,nzm,mx,my,mz)
 implicit none
 integer,intent(in) :: nxm,nym,nzm,mx,my,mz
-real(8), dimension(nxm,nym,nzm) :: test
+real(8), dimension(mx,my,mz) :: x
 integer :: err
 
 if(fftw) then ! FFTW
@@ -118,13 +115,19 @@ print*,"Preparing FFTW ..."
 !     call fftw_plan_with_nthreads(1)
 
 
-     fftw_plan1 = fftw_plan_dft_r2c_3d(nzm, nym, nxm, &
-                                    test, fftw_cmp,     &
-                                    FFTW_FLAG);
-                                    
-     fftw_plan2 = fftw_plan_dft_c2r_3d(nzm, nym, nxm, &
-                                    fftw_cmp, test,     &
-                                    FFTW_FLAG);
+     fftw_plan1 = fftw_plan_many_dft_r2c(3, [nzm,nym,nxm], 1,   &
+                                      x, [mz,my,mx],            &
+                                      1, 1,                     &
+                                      fftw_cmp, [nzm,nym,mx/2], &
+                                      1, 1,                     &
+                                      FFTW_FLAG);
+
+     fftw_plan2 = fftw_plan_many_dft_c2r(3, [nzm,nym,nxm], 1,   &
+                                      fftw_cmp, [nzm,nym,mx/2], &
+                                      1, 1,                     &
+                                      x, [mz,my,mx],            &
+                                      1, 1,                     &
+                                      FFTW_FLAG);
 endif        
 end subroutine init_SLFFT3D
 

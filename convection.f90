@@ -24,7 +24,7 @@ if (nz.gt.1) then !gravite suivant z
    do k=1,nz
    do j=1,ny 
    do i=1,nx
-      sy9(i,j,k)=1./T0*gravite*(temp(i,j,k)-T0)+sy9(i,j,k) 
+      sy8(i,j,k)=1./T0*gravite*(temp(i,j,k)-T0)+sy8(i,j,k) 
    enddo
    enddo
    enddo
