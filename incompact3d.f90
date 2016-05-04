@@ -60,7 +60,12 @@ real(8)                     :: aaaa
    call waves ()  
    call initial (ux,uy,uz,gx,gy,gz,fx,fy,fz,phi,ppm,temp,gtemp)
    
-   call init_SLFFT2D(nxm,nym,mx,my)
+   if(nz==1) then
+     call init_SLFFT2D(nxm,nym,mx,my)
+   else
+     call init_SLFFT3D(nxm,nym,nzm,mx,my,mz)
+   endif
+   
    if (ivirtuel.eq.2) then !new method
        call gene_epsi(epsi,epsidec)
        call verif_epsi(epsi)
@@ -285,7 +290,11 @@ real(8)                     :: aaaa
 !         endif
 !stop
    enddo
-   call end_SLFFT2D
+   if(nz==1) then
+     call end_SLFFT2D
+   else
+     call end_SLFFT3D
+   endif
 !
 end PROGRAM incompact3d
 

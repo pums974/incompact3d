@@ -252,14 +252,14 @@ if (iecoule.eq.7) then ! condition isotherme
       do k=1,nz
       do i=1,nx 
          temp(i,1,k)=T0
-         temp(j,ny,k)=T0 
+         temp(i,ny,k)=T0 
       enddo
       enddo
 !
      do j=1,ny
      do i=1,nx 
          temp(i,j,1)=T0
-         temp(j,j,nz)=T0 
+         temp(i,j,nz)=T0 
       enddo
       enddo  
    else

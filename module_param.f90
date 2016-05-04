@@ -10,6 +10,7 @@ module variables
 !                  --> nm = n  
 !                  --> m  = n + 2
 integer,parameter :: nx=65,ny=33,nz=33
+!integer,parameter :: nx=9,ny=9,nz=9
 integer,parameter :: nxm=nx-1,nym=ny-1,nzm=nz -1
 !integer,parameter :: nx=257,ny=129,nz=1
 !integer,parameter :: nxm=nx-1,nym=ny-1,nzm=nz 
