@@ -18,7 +18,7 @@ real(8),dimension(nx,ny,nz) :: ux,uy,uz,epsi
 real(8),dimension(nx,ny,nz) :: sy1,sy2,sy3
 real(8),dimension(nx,ny,nz) :: sy4,sy5,sy6
 real(8),dimension(nx,ny,nz) :: sy7,sy8,sy9
-real(8),dimension(nxm,nym,nz) :: ppm
+real(8),dimension(nxm,nym,nzm) :: ppm
 real(8),dimension(mx,my,mz) :: di2,di1 ! TODO
 
    call gradpression(ppm,sy1,sy2,sy3,sy4,sy5,sy6,sy7,sy8,sy9,di1,di2)
@@ -48,10 +48,15 @@ nxyz=nx*ny*nz
 
 if (nlock.eq.1) then
    if (nz.gt.1) then
-      do ijk=1,nxyz
-         uy(ijk,1,1)=-py(ijk,1,1)+uy(ijk,1,1) 
-         uz(ijk,1,1)=-pz(ijk,1,1)+uz(ijk,1,1) 
-         ux(ijk,1,1)=-px(ijk,1,1)+ux(ijk,1,1)
+!      do ijk=1,nxyz ! TODO
+      do k=1,nz
+      do j=1,ny
+      do i=1,nx
+         uy(i,j,k)=-py(i,j,k)+uy(i,j,k) 
+         uz(i,j,k)=-pz(i,j,k)+uz(i,j,k) 
+         ux(i,j,k)=-px(i,j,k)+ux(i,j,k)
+      enddo
+      enddo
       enddo
    else
 !      do ijk=1,nxyz ! TODO
@@ -67,10 +72,15 @@ if (nlock.eq.1) then
 endif
 if (nlock.eq.2) then
    if (nz.gt.1) then
-      do ijk=1,nxyz
-         uy(ijk,1,1)=py(ijk,1,1)+uy(ijk,1,1) 
-         uz(ijk,1,1)=pz(ijk,1,1)+uz(ijk,1,1) 
-         ux(ijk,1,1)=px(ijk,1,1)+ux(ijk,1,1)
+!      do ijk=1,nxyz ! TODO
+      do k=1,nz
+      do j=1,ny
+      do i=1,nx
+         uy(i,j,k)=py(i,j,k)+uy(i,j,k) 
+         uz(i,j,k)=pz(i,j,k)+uz(i,j,k) 
+         ux(i,j,k)=px(i,j,k)+ux(i,j,k)
+      enddo
+      enddo
       enddo
    else
 !      do ijk=1,nxyz ! TODO

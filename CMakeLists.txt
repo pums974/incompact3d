@@ -26,7 +26,7 @@ option(lto     "Enable link-time optimizations" ON)
 if (CMAKE_Fortran_COMPILER_ID STREQUAL "Intel")
   set(CMAKE_Fortran_FLAGS         "-fPIC -g  -traceback -init=zero")
   set(CMAKE_Fortran_FLAGS_RELEASE "-xHOST -O3 -no-prec-div -fp-model fast=2") # -prof-use -prof-dir=prof_dir/  -prof-gen
-  set(CMAKE_Fortran_FLAGS_DEBUG   "-O0 -C -debug all -warn all,nounused -fpe0 -ftrapuv -fstack-protector-all -WB -fp-stack-check -u -gen-interfaces -stand f08 -warn nodeclarations") #  
+  set(CMAKE_Fortran_FLAGS_DEBUG   "-O0 -C -debug all -warn all,nounused -fpe0 -ftrapuv -fstack-protector-all -WB -fp-stack-check -u -gen-interfaces -stand f08 -warn nodeclarations -check noarg_temp_created") #  
   set(DOUBLE_FLAGS "-r8")
   set(OPTRPT_FLAGS "-qopt-report=5 -guide -diag-enable=openmp,vec,par")
   set(LTO_FLAGS    "-ipo -ipo-jobs=4")
